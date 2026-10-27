@@ -1,0 +1,354 @@
+/* --- Essential Principles Banner (Stacked & Inline) --- */
+.principles-stacked {
+  margin: 15px auto 15px auto;
+  max-width: 1200px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+  /* Keeps the border-radius clean */
+}
+
+.principle-row {
+  display: flex;
+  align-items: center;
+  padding: 4px 10px;
+  /* Extremely minimal padding */
+  gap: 12px;
+}
+
+/* Creates the 1px divider line exactly between the two rows */
+.principle-row:first-child {
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.text-content {
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.lang-hi {
+  opacity: 0.85;
+  /* Slightly dims the Hindi to establish visual hierarchy */
+}
+
+/* A subtle vertical bar to separate the languages cleanly */
+.lang-sep {
+  margin: 0 8px;
+  opacity: 0.3;
+  font-weight: 300;
+}
+
+strong {
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+/* Colors */
+.box-stop {
+  background-color: #fff5f5;
+  border-left: 5px solid #ef4444;
+  color: #7f1d1d;
+}
+
+.box-follow {
+  background-color: #f0fdf4;
+  border-left: 5px solid #22c55e;
+  color: #14532d;
+}
+
+.principle-icon {
+  font-size: 1.25rem;
+  /* Shrunk down to fit the minimal padding */
+  flex-shrink: 0;
+}
+
+
+/* --- Divine Shield Protection & SEO Section --- */
+.divine-shield-section {
+  margin: 40px auto 60px auto;
+  max-width: 1200px;
+  width: 90%;
+}
+
+.shield-container {
+  background: white;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  border-left: 5px solid #a67c00;
+  /* The elegant dark gold accent */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+  padding: 30px 40px;
+}
+
+.shield-header {
+  margin-bottom: 25px;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 15px;
+
+  h2 {
+    margin: 0;
+    color: #a67c00;
+    font-size: 1.4rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    /* Helps mobile rendering */
+  }
+}
+
+.shield-content {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  /* Spaces out the paragraphs */
+}
+
+.content-block {
+  h3 {
+    color: #00478f;
+    /* Your brand blue */
+    font-size: 1.1rem;
+    margin: 0 0 10px 0;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+}
+
+/* Typography styles for dual-language */
+.lang-en {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #334155;
+  margin: 0 0 8px 0;
+  font-weight: 500;
+}
+
+.lang-hi {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #475569;
+  margin: 0;
+  opacity: 0.9;
+}
+
+/* Reusing your subtle divider aesthetic */
+.lang-sep {
+  margin: 0 10px;
+  opacity: 0.3;
+  font-weight: 300;
+  color: #94a3b8;
+}
+
+.lang-hi-sub {
+  font-size: 0.95rem;
+  opacity: 0.8;
+  font-weight: 500;
+}
+
+strong {
+  color: #0f172a;
+  font-weight: 700;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .shield-container {
+    padding: 20px;
+  }
+
+  .lang-sep {
+    display: none;
+    /* Hide the vertical bar on small screens if it wraps awkwardly */
+  }
+
+  .shield-header h2,
+  .content-block h3 {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}
+
+.shield-sub-intro {
+  margin: 8px 0 0 0;
+  font-size: 0.95rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.language-divider {
+  border: none;
+  border-top: 1px dashed #cbd5e1;
+  margin: 30px 0;
+}
+
+/* --- Compact One-Line Bhavishya Malika Overview Link --- */
+.bm-overview-line {
+  margin: 6px auto 0 auto;
+  padding-bottom: 0;
+  max-width: 1200px;
+  width: 90%;
+  display: flex;
+  justify-content: center;
+}
+
+.bm-inline-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 18px 7px 16px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-bottom: 2px solid #d4a017;
+  /* Flag Gold bottom accent */
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(0, 71, 143, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: all 0.22s ease;
+
+  /* The 3-Color Flag Stripe: Flag Red, Flag Gold, Flag Blue */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3.5px;
+    background: linear-gradient(to right,
+        #e02424 0%, #e02424 33.3%,
+        /* Flag Red */
+        #FFD700 33.3%, #FFD700 66.6%,
+        /* Flag Gold */
+        #00478f 66.6%, #00478f 100%
+        /* Flag Blue */
+      );
+  }
+
+  .bm-book-icon {
+    font-size: 1.15rem;
+    line-height: 1;
+  }
+
+  .bm-link-title {
+    font-weight: 700;
+    color: #003875;
+    /* Authoritative Flag Blue */
+    font-size: 0.94rem;
+    letter-spacing: 0.2px;
+    margin-right: 6px;
+  }
+
+  &:hover {
+    box-shadow: 0 6px 18px rgba(0, 56, 117, 0.16), 0 2px 8px rgba(224, 36, 36, 0.12);
+    border-color: #cbd5e1;
+    border-bottom-color: #b8860b;
+
+    .bm-link-arrow {
+      transform: translateX(3px);
+      background: #ff2a2a;
+    }
+  }
+
+  .bm-link-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background: #e02424; /* Flag Red badge */
+    color: #ffffff;
+    border-radius: 50%;
+    font-size: 0.7rem;
+    font-weight: 700;
+    box-shadow: 0 2px 5px rgba(224, 36, 36, 0.35);
+    transition: transform 0.2s ease, background 0.2s ease;
+    margin-left: 2px;
+  }
+}
+
+.bm-action-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  border-left: 1px solid #e2e8f0;
+  padding-left: 14px;
+  margin-left: 4px;
+}
+
+.bm-action-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  font-weight: 700;
+  color: #334155;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+  line-height: 1;
+
+  .bm-link-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    background: #e02424;
+    /* Flag Red badge */
+    color: #ffffff;
+    border-radius: 50%;
+    font-size: 0.65rem;
+    font-weight: 700;
+    box-shadow: 0 2px 5px rgba(224, 36, 36, 0.35);
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+
+  &:hover {
+    color: #003875;
+    transform: translateY(-1px);
+
+    .bm-link-arrow {
+      transform: translateX(2px);
+      background: #ff2a2a;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .bm-inline-container {
+    padding: 7px 12px;
+    gap: 6px;
+
+    .bm-link-title {
+      font-size: 0.86rem;
+      margin-right: 0px;
+    }
+  }
+
+  .bm-action-group {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    padding-left: 10px;
+    margin-left: 2px;
+  }
+
+  .bm-action-link {
+    font-size: 0.8rem;
+
+    .bm-link-arrow {
+      width: 16px;
+      height: 16px;
+      font-size: 0.6rem;
+    }
+  }
+}

@@ -1,0 +1,218 @@
+.bm-page {
+  min-height: 100%;
+  background-color: transparent;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.bm-header {
+  background: #fcfaf5; /* Light golden/cream background */
+  color: #996515; /* Dark golden font */
+  padding: 15px 20px 20px 20px; 
+  text-align: center;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+  
+  /* Decorative bottom border using flag colors, similar to trisandhya panel but as bottom border */
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(
+      to right, 
+      #ffffff 0%, #ffffff 20%,
+      #ff2a2a 20%, #ff2a2a 40%, 
+      #FFD700 40%, #FFD700 60%, 
+      #00cc00 60%, #00cc00 80%, 
+      #00bfff 80%, #00bfff 100% 
+    );
+  }
+
+  .header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 1.5rem; 
+    font-weight: 500;
+  }
+
+  .subtitle {
+    margin: 4px 0 0 0;
+    font-size: 0.95rem;
+    font-weight: 400;
+    opacity: 0.85;
+  }
+}
+
+.bm-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px 60px 20px;
+  margin-top: 30px;
+  position: relative;
+}
+
+.search-container {
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: center;
+}
+
+.search-wrapper {
+  background: white;
+  border-radius: 4px;
+  padding: 8px 15px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  border: 1px solid #e2e8f0;
+  transition: border-color 0.2s;
+
+  &:focus-within {
+    border-color: #a67c00;
+  }
+
+  .search-icon {
+    font-size: 1rem;
+    color: #9ca3af;
+    margin-right: 10px;
+  }
+
+  .search-input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 0.95rem;
+    color: #996515;
+    background: transparent;
+    padding: 4px 0;
+    
+    &::placeholder {
+      color: #9ca3af;
+    }
+  }
+}
+
+.languages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 15px;
+}
+
+.language-card-compact {
+  background: white;
+  border-radius: 6px;
+  padding: 12px 16px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    border-color: #cbd5e1;
+  }
+
+  .card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex-grow: 1;
+  }
+
+  .bm-title {
+    font-size: 1rem;
+    color: #996515; /* Dark golden font */
+    font-weight: 500;
+    line-height: 1.2;
+    
+    .en-title {
+      font-size: 0.85rem;
+      color: #a67c00;
+      opacity: 0.8;
+      margin-left: 4px;
+    }
+  }
+
+  .lang-name {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+
+    .native-name {
+      font-weight: 500;
+      color: #64748b;
+      font-size: 0.85rem;
+    }
+
+    .en-name {
+      color: #9ca3af;
+      font-size: 0.85rem;
+    }
+  }
+
+  .btn-view-compact {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: white; 
+    color: #a67c00;
+    border: 1px solid #a67c00;
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    transition: all 0.2s;
+
+    &:hover {
+      background: #fcfaf5;
+      box-shadow: 0 1px 3px rgba(166, 124, 0, 0.1);
+    }
+  }
+}
+
+.no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px 20px;
+  background: white;
+  border-radius: 6px;
+  border: 1px dashed #cbd5e1;
+  color: #a67c00;
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .bm-header {
+    padding: 15px 15px 20px 15px;
+
+    .header-content {
+      flex-direction: column;
+    }
+  }
+
+  .bm-container {
+    padding: 0 15px 30px 15px;
+  }
+
+  .languages-grid {
+    grid-template-columns: 1fr;
+  }
+}

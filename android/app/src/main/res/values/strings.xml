@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Trisandhya - Bhavishya Malika - Kalkiram</string>
+    <string name="title_activity_main">Trisandhya - Bhavishya Malika - Kalkiram</string>
+    <string name="package_name">com.kalkiram.app</string>
+    <string name="custom_url_scheme">com.kalkiram.app</string>
+</resources>

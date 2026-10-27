@@ -1,0 +1,36 @@
+<div class="ticker-wrapper" [style.backgroundColor]="backgroundColor">
+  <div class="ticker-track" [style.animationDuration]="animationDuration">
+    
+    <!-- Original Set -->
+    <div class="ticker-content">
+      @for (item of items; track $index) {
+        <span class="ticker-item">
+          @if (item.gemColor) {
+            <!-- SVG Diamond/Gem Icon -->
+            <svg class="gem-icon" [style.fill]="item.gemColor" viewBox="0 0 24 24" width="36" height="36">
+  <path d="M12 2L2 9l10 13L22 9l-10-7zm0 2.7l4.5 3.3H7.5L12 4.7zM4 10h3.5v4.5L4 10zm4.5 4.5V10h7v4.5l-3.5 4.5-3.5-4.5zm8.5 0V10H20l-3.5 4.5z"/>
+</svg>
+          }
+          {{ item.text }}
+        </span>
+        <span class="separator">•</span>
+      }
+    </div>
+
+    <!-- Duplicated Set -->
+    <div class="ticker-content" aria-hidden="true">
+      @for (item of items; track $index) {
+        <span class="ticker-item">
+          @if (item.gemColor) {
+            <svg class="gem-icon" [style.fill]="item.gemColor" viewBox="0 0 24 24" width="36" height="36">
+  <path d="M12 2L2 9l10 13L22 9l-10-7zm0 2.7l4.5 3.3H7.5L12 4.7zM4 10h3.5v4.5L4 10zm4.5 4.5V10h7v4.5l-3.5 4.5-3.5-4.5zm8.5 0V10H20l-3.5 4.5z"/>
+</svg>
+          }
+          {{ item.text }}
+        </span>
+        <span class="separator">•</span>
+      }
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<ion-content>
+  <div class="bm-page">
+    <div class="bm-header">
+      <div class="header-content">
+        <h1>Bhavishya Malika - An Overview</h1>
+        <p class="subtitle">Available in 127 Languages</p>
+      </div>
+    </div>
+
+    <div class="bm-container">
+      <div class="search-container">
+        <div class="search-wrapper">
+          <span class="search-icon">🔍</span>
+          <input 
+            type="text" 
+            placeholder="Search languages..." 
+            [ngModel]="searchQuery()"
+            (ngModelChange)="searchQuery.set($event)"
+            class="search-input"
+          >
+        </div>
+      </div>
+
+      <div class="languages-grid">
+        @for (lang of filteredLanguages(); track lang.code) {
+          <div class="language-card-compact">
+            <div class="card-info">
+              <div class="bm-title">
+                <span class="native">{{ lang.nativeTitle }}</span>
+                @if (lang.englishTitle) {
+                  <span class="en-title">({{ lang.englishTitle }})</span>
+                }
+              </div>
+              
+              <div class="lang-name">
+                <span style="font-weight: 500; color: #0d47a1;">
+                  {{ getFormattedTitle(lang).main }}
+                  @if (getFormattedTitle(lang).iast) {
+                    <span style="font-size: 0.65rem; background: #eef2ff; color: #4f46e5; padding: 2px 5px; border-radius: 4px; margin-left: 6px; font-weight: 600; vertical-align: middle;">IAST</span>
+                  }
+                </span>
+              </div>
+            </div>
+            
+            <div style="display: flex; justify-content: flex-end;">
+              <a [routerLink]="['/reader']" [queryParams]="{ url: '/assets' + lang.viewUrl }" class="btn-view-compact">
+                View
+              </a>
+            </div>
+          </div>
+        } @empty {
+          <div class="no-results">
+            <p>No languages found matching "{{ searchQuery() }}"</p>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</ion-content>

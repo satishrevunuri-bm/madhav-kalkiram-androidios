@@ -1,0 +1,165 @@
+/* --- Elegant & Subtle Theme Variables --- */
+$brand-gold: #a67c00;
+$brand-blue: #00478f;
+$border-light: #e2e8f0;
+$bg-header: #fcfaf5;
+/* Subtle warm/cream tint for the resting state */
+$bg-header-hover: #f3efe6;
+/* Slightly deeper warm tint for the hover state */
+$bg-btn-hover: #fcfaf5;
+/* Keep button hovers very light */
+
+.panel-container {
+  margin: 10px auto 30px auto;
+  max-width: 1200px;
+  width: 90%;
+  background: transparent;
+}
+
+.panel-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+
+  background: $bg-header;
+  color: #996515;
+  /* The rich text color you requested */
+
+  /* --- The Thick Pancharangi Block Border --- */
+  border-top: 8px solid;
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+  border-image: linear-gradient(to right,
+      #ffffff 0%, #ffffff 20%,
+      /* White Block */
+      #ff2a2a 20%, #ff2a2a 40%,
+      /* Red Block */
+      #FFD700 40%, #FFD700 60%,
+      /* Gold Block */
+      #00cc00 60%, #00cc00 80%,
+      /* Green Block */
+      #00bfff 80%, #00bfff 100%
+      /* Sky Blue Block */
+    ) 1;
+
+  /* THE FIX: A very soft, elegant drop shadow that gently lifts the header off the white page */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+
+  border-radius: 0 0 6px 6px;
+  cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+
+  h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+
+  .icon {
+    font-size: 1rem;
+  }
+
+  &:hover {
+    background: $bg-header-hover;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    /* Shadow deepens slightly on hover */
+  }
+}
+
+.panel-content {
+  padding: 20px 0;
+}
+
+.search-container {
+  margin-bottom: 25px;
+
+  .search-input {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 0.95rem;
+    border: 1px solid $border-light;
+    border-radius: 4px;
+    color: $brand-blue;
+    outline: none;
+    transition: border-color 0.2s;
+
+    &::placeholder {
+      color: #9ca3af;
+    }
+
+    &:focus {
+      border-color: $brand-blue;
+    }
+  }
+}
+
+.tiles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 15px;
+}
+
+.language-tile {
+  background: white;
+  border: 1px solid $border-light;
+  border-radius: 6px;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+  transition: all 0.2s;
+
+  /* Forces the browser to skip rendering the heavy audio players for off-screen tiles */
+  content-visibility: auto;
+  contain-intrinsic-size: auto 120px;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    border-color: #cbd5e1;
+  }
+}
+
+.tile-actions {
+  display: flex;
+  gap: 8px;
+
+  .btn {
+    text-align: center;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s;
+    background-color: white;
+    border: 1px solid $brand-gold;
+    color: $brand-gold;
+
+    &:hover {
+      background-color: $bg-btn-hover;
+      box-shadow: 0 1px 3px rgba(166, 124, 0, 0.1);
+    }
+  }
+}
+
+.no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px;
+  color: $brand-blue;
+  font-size: 1rem;
+}
+
+/* Instantly removes the panel from the render tree without destroying DOM memory */
+/* The absolute fastest way to hide massive DOM structures on mobile */
+.is-hidden {
+  display: none !important;
+  content-visibility: hidden !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+}

@@ -1,0 +1,78 @@
+<div class="panel-container">
+  <!-- Collapsible Header -->
+  <button class="panel-header" (click)="togglePanel()">
+    <h2>Trikala Sandhya - PDFs (125 Languages) - त्रिकाल संध्या - PDF (125 भाषाएँ)</h2>
+    <span class="icon">{{ isOpen ? '▲' : '▼' }}</span>
+  </button>
+
+  <!-- Panel Content (Visible only when isOpen is true) -->
+  <div class="panel-content" [class.is-hidden]="!isOpen">
+
+    <!-- Search Bar -->
+    <div class="search-container">
+      <input type="text" placeholder="Search for a language (e.g., Hindi, Russian, Tamil)..." (input)="onSearch($event)"
+        class="search-input" />
+    </div>
+
+    <!-- Language Tiles Grid -->
+    <div class="tiles-grid">
+      @for (lang of filteredLanguages; track lang.englishName) {
+        <div class="language-tile">
+          <!-- Row 1: Title and Buttons -->
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px;">
+            <div style="display: flex; flex-direction: column; flex: 1;">
+              <span style="font-weight: 500; color: #0d47a1; font-size: 1rem; line-height: 1.2;">
+                {{ getFormattedTitle(lang).main }}
+                @if (getFormattedTitle(lang).iast) {
+                  <span style="font-size: 0.65rem; background: #eef2ff; color: #4f46e5; padding: 2px 5px; border-radius: 4px; margin-left: 6px; font-weight: 600; vertical-align: middle;">IAST</span>
+                }
+              </span>
+            </div>
+            
+            <div class="tile-actions" style="display: flex; gap: 8px;">
+              <a [routerLink]="['/reader']" [queryParams]="{ url: '/assets/trisandhya/' + lang.htmlFilename }" class="btn btn-read" style="padding: 6px 12px; font-size: 0.8rem;">
+                View
+              </a>
+              <a [href]="'https://kalkiram.com/trisandhya/' + lang.pdfFilename" target="_blank" download class="btn btn-download" style="display: flex; align-items: center; justify-content: center; gap: 4px; padding: 6px 12px; font-size: 0.8rem;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width: 14px; height: 14px;">
+                  <path fill-rule="evenodd" d="M12 2.25a.75.75 0 01.75.75v11.69l3.22-3.22a.75.75 0 111.06 1.06l-4.5 4.5a.75.75 0 01-1.06 0l-4.5-4.5a.75.75 0 111.06-1.06l3.22 3.22V3a.75.75 0 01.75-.75zm-9 13.5a.75.75 0 01.75.75v2.25a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5V16.5a.75.75 0 011.5 0v2.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V16.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
+                </svg>
+                PDF
+              </a>
+            </div>
+          </div>
+
+          <!-- Row 2: Audio Player -->
+          @defer (on viewport) {
+            <div style="display: flex; flex-direction: column; gap: 4px; width: 100%;">
+              <span style="font-size: 0.75rem; color: #d97706; font-style: italic; margin-left: 2px;">{{ lang.listenText || 'Please Listen' }}</span>
+              <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+                <audio controls preload="none" style="flex: 1; height: 36px; outline: none;" (play)="blurActiveElement()" (click)="blurActiveElement()">
+                  <source src="/assets/trisandhya/Tri_Sandhya_Master_Final.mp3" type="audio/mpeg">
+                  Your browser does not support the audio element.
+                </audio>
+                <a href="/assets/trisandhya/Tri_Sandhya_Master_Final.mp3" download="Tri_Sandhya_Master.mp3" style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 4px; background-color: white; border: 1px solid #00478f; color: #00478f;" title="Download Audio">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width: 18px; height: 18px;">
+                    <path fill-rule="evenodd" d="M12 2.25a.75.75 0 01.75.75v11.69l3.22-3.22a.75.75 0 111.06 1.06l-4.5 4.5a.75.75 0 01-1.06 0l-4.5-4.5a.75.75 0 111.06-1.06l3.22 3.22V3a.75.75 0 01.75-.75zm-9 13.5a.75.75 0 01.75.75v2.25a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5V16.5a.75.75 0 011.5 0v2.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V16.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          } @placeholder {
+            <div style="height: 36px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 0.85rem; font-style: italic;">
+              Loading audio...
+            </div>
+          }
+        </div>
+      }
+
+      <!-- Empty State if search yields no results -->
+      @if (filteredLanguages.length === 0) {
+      <div class="no-results">
+        No languages found matching your search.
+      </div>
+      }
+    </div>
+
+  </div>
+</div>

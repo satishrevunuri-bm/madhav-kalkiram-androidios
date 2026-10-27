@@ -1,0 +1,23 @@
+<div class="custom-tabs-container">
+  <div class="custom-tabs-content">
+    <router-outlet></router-outlet>
+  </div>
+  
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button routerLink="/tabs/home" routerLinkActive="tab-selected" [routerLinkActiveOptions]="{exact: true}">
+      <ion-icon aria-hidden="true" name="home"></ion-icon>
+      <ion-label>Home</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/tabs/bhavishyamalika" routerLinkActive="tab-selected">
+      <ion-icon aria-hidden="true" name="book"></ion-icon>
+      <ion-label>Bhavishya Malika</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/tabs/trisandhya" routerLinkActive="tab-selected">
+      <ion-icon aria-hidden="true" name="document-text"></ion-icon>
+      <ion-label>Trisandhya</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</div>
+

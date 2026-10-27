@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 240">
+  <!-- Sudharma pancharangi flag of Lord Kalki: swallowtail (forked) pennant.
+       Stripes top to bottom: white=Satya, red=Prem-Maitri, green=Daya,
+       yellow=Kshema, blue=Shanti. Om disc centered on the green stripe. -->
+  <defs>
+    <clipPath id="sudharma-swallowtail">
+      <polygon points="42,30 247,30 202,85 247,140 42,140"/>
+    </clipPath>
+  </defs>
+  <g>
+    <rect x="36" y="20" width="6" height="200" rx="3" fill="#8a6d1f"/>
+    <circle cx="39" cy="18" r="7" fill="#d4a017"/>
+    <g clip-path="url(#sudharma-swallowtail)">
+      <rect x="42" y="30" width="205" height="22" fill="#ffffff"/>
+      <rect x="42" y="52" width="205" height="22" fill="#e02424"/>
+      <rect x="42" y="74" width="205" height="22" fill="#16a34a"/>
+      <rect x="42" y="96" width="205" height="22" fill="#facc15"/>
+      <rect x="42" y="118" width="205" height="22" fill="#1e3a8a"/>
+    </g>
+    <polygon points="42,30 247,30 202,85 247,140 42,140" fill="none" stroke="#b98a1e" stroke-width="1.5"/>
+    <circle cx="144" cy="85" r="26" fill="#ffffff" stroke="#d4a017" stroke-width="3"/>
+    <text x="144" y="97" text-anchor="middle" font-family="'Noto Serif Devanagari','Noto Serif',serif" font-size="34" fill="#b91c1c" font-weight="bold">&#2384;</text>
+  </g>
+</svg>

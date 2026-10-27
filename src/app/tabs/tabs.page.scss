@@ -1,0 +1,18 @@
+.custom-tabs-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background: white;
+}
+
+.custom-tabs-content {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Optional: style for selected tab */
+ion-tab-button.tab-selected {
+  --color: var(--ion-color-primary, #3880ff);
+}

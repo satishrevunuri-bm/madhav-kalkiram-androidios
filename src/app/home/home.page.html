@@ -1,0 +1,156 @@
+<ion-content>
+  <main class="landing-page">
+  <!-- Strip 1: 5 Gems (Light Gold/Vanilla, Slower Speed) -->
+  <app-scrolling-ticker [items]="gemsItems" [backgroundColor]="'#F3E5AB'" [animationDuration]="'5000s'">
+  </app-scrolling-ticker>
+
+  <!-- Strip 2: Madhava Naam (Pure Gold, Medium Speed) -->
+  <app-scrolling-ticker [items]="madhavaItems" [backgroundColor]="'#FFD700'" [animationDuration]="'800s'">
+  </app-scrolling-ticker>
+
+  <!-- Strip 3: Trikal Sandhya (Goldenrod/Darker Gold, Medium Speed) -->
+  <app-scrolling-ticker [items]="trikalItems" [backgroundColor]="'#DAA520'" [animationDuration]="'2000s'">
+  </app-scrolling-ticker>
+
+  <!-- NEW: Essential Principles Banner (Stacked & Inline) -->
+  <section class="principles-stacked">
+    <!-- Row 1: Stop -->
+    <div class="principle-row box-stop">
+      <span class="principle-icon">🚫</span>
+      <div class="text-content">
+        <span class="lang-en"><strong>STOP:</strong> Killing animals, eating non-veg (including egg), consuming alcohol
+          and tobacco.</span>
+        <span class="lang-sep">|</span>
+        <span class="lang-hi"><strong>छोड़ें:</strong> पशु हत्या, मांसाहार (अंडे सहित), मद्यपान और सभी प्रकार के तंबाकू
+          उत्पाद।</span>
+      </div>
+    </div>
+
+    <!-- Row 2: Follow -->
+    <div class="principle-row box-follow">
+      <span class="principle-icon">✨</span>
+      <div class="text-content">
+        <span class="lang-en"><strong>FOLLOW:</strong> Truth, Forgiveness, Kindness, Peace, & Love.</span>
+        <span class="lang-sep">|</span>
+        <span class="lang-hi"><strong>अपनाएं:</strong> सत्य, क्षमा, दया, शांति और प्रेम।</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bhavishya Malika Overview Compact Link -->
+  <div class="bm-overview-line" style="align-items: center; gap: 15px;">
+    <a routerLink="/tabs/bhavishyamalika" class="bm-inline-container" style="text-decoration: none; cursor: pointer;">
+      <span class="bm-book-icon">📖</span>
+      <span class="bm-link-title">Bhavishya Malika - An Overview (127 Languages)</span>
+      <span class="bm-link-arrow">➔</span>
+    </a>
+  </div>
+
+  <app-trisandhya-panel></app-trisandhya-panel>
+
+  <div class="shield-container">
+
+    <!-- Clean, Elegant Header -->
+    <div class="shield-header">
+      <h2>
+        Divine Shield <span class="lang-sep">|</span> <span class="lang-hi">दिव्य कवच</span><span
+          class="lang-sep">|</span> <span class="lang-hi"><strong>सत्य</strong> (Truth), <span><strong>क्षमा</strong>
+            (Forgiveness)</span>, <strong>दया</strong> (Kindness), <strong>शांति</strong> (Peace), और
+          <strong>प्रेम</strong> (Love)</span>
+      </h2>
+      <p class="shield-sub-intro">
+        Surrendering completely to Lord Madhav <span class="lang-sep">|</span> भगवान माधव के प्रति पूर्ण समर्पण
+      </p>
+      <p class="shield-sub-intro">
+        Trikal Sandhya - Srimad Bhagavat Mahapuran (Daily Read) <span class="lang-sep">|</span> त्रिकाल संध्या -
+        श्रीमद्भागवत महापुराण (नित्य पाठ)
+      </p>
+    </div>
+
+    <!-- SEO-Optimized: English Section First -->
+    <div class="language-content-block">
+      <div class="content-block">
+        <p class="lang-en">According to the prophecies of the Bhavishya Malika, the world is currently entering a
+          catastrophic transition period known as 'Khanda Pralay' or partial dissolution. In these turbulent times
+          marked by unprecedented global crises, material wealth will completely fail to protect humanity. True
+          sanctuary and survival are found only in unwavering adherence to Dharma.</p>
+      </div>
+
+      <div class="content-block">
+        <h3>Protection from Floods and Earthquakes</h3>
+        <p class="lang-en">Ancient texts warn of impending natural disasters, including major earthquakes that will
+          drastically shake the earth and a terrifying period of total darkness accompanied by devastating floods.
+          However, those seeking protection from floods, earthquakes, and natural calamities will find their ultimate
+          divine shield in the continuous practice of Trikal Sandhya. Instead of succumbing to fear, devotees who
+          strictly follow this spiritual discipline will be guided to safety by divine power. For the pure-hearted, this
+          time of transition will pass in absolute bliss, completely enveloped by the protective aura of the Lord's
+          name.</p>
+      </div>
+
+      <div class="content-block">
+        <h3>Spiritual Shielding Against War</h3>
+        <p class="lang-en">Alongside natural disasters, the prophecies clearly indicate the outbreak of great global
+          conflicts and war. The strongest defense against the horrors of war is a heart filled with devotion.
+          Surrendering completely to Lord Madhav and performing Trikal Sandhya creates an impenetrable protective shield
+          around individuals, safeguarding them from worldly suffering and the agonizing cycle of birth and death.</p>
+      </div>
+
+      <div class="content-block">
+        <h3>The Path of Compassion: The Five Pillars</h3>
+        <p class="lang-en">The absolute key to invoking this divine protection is showing profound kindness towards all
+          living beings. God's shield is only extended to those who harbor no cruelty in their hearts. True devotees
+          must strictly uphold the five supreme virtues: <strong>Satya</strong> (Truth), <strong>Kshama</strong>
+          (Forgiveness), <strong>Daya</strong> (Kindness), <strong>Shanti</strong> (Peace), and <strong>Prem</strong>
+          (Love). By living these principles daily, protecting animal/plant/all life, and chanting the Lord's name
+          (Madhav), followers cleanse their past karmas. This spiritual purity is the ultimate armor, guaranteeing not
+          only protection from current worldly destruction but also ensuring a safe, blessed passage into the upcoming
+          Satya Yuga (the Era of Truth).</p>
+      </div>
+    </div>
+
+    <!-- Divider between languages for visual cleanliness -->
+    <hr class="language-divider">
+
+    <!-- SEO-Optimized: Hindi Section Follows -->
+    <div class="language-content-block">
+      <div class="content-block">
+        <p class="lang-hi">भविष्य मालिका की भविष्यवाणियों के अनुसार, विश्व वर्तमान में 'खंड प्रलय' या आंशिक विनाश नामक
+          एक विनाशकारी संक्रमण काल में प्रवेश कर रहा है। अभूतपूर्व वैश्विक संकटों से भरे इन अशांत समयों में, भौतिक
+          संपत्ति मानवता की रक्षा करने में पूरी तरह विफल रहेगी। सच्चा आश्रय और जीवन-रक्षा केवल धर्म के अटूट पालन में ही
+          प्राप्त होती है।</p>
+      </div>
+
+      <div class="content-block">
+        <h3>बाढ़ और भूकंप से सुरक्षा</h3>
+        <p class="lang-hi">प्राचीन ग्रंथ आसन्न प्राकृतिक आपदाओं की चेतावनी देते हैं, जिनमें बड़े भूकंप शामिल हैं जो
+          पृथ्वी को बुरी तरह हिला देंगे, और विनाशकारी बाढ़ के साथ पूर्ण अंधकार का एक भयानक दौर आएगा। हालाँकि, बाढ़,
+          भूकंप और प्राकृतिक आपदाओं से सुरक्षा चाहने वालों को त्रिकाल संध्या के निरंतर अभ्यास में अपना परम दिव्य कवच
+          मिलेगा। भय के आगे घुटने टेकने के बजाय, जो भक्त इस आध्यात्मिक अनुशासन का कड़ाई से पालन करते हैं, उन्हें ईश्वरीय
+          शक्ति द्वारा सुरक्षित स्थान पर ले जाया जाएगा। पवित्र हृदय वालों के लिए, यह संक्रमण काल भगवान के नाम के
+          सुरक्षात्मक आभामंडल से पूरी तरह घिरा हुआ, पूर्ण आनंद में बीतेगा।</p>
+      </div>
+
+      <div class="content-block">
+        <h3>युद्ध के विरुद्ध आध्यात्मिक कवच</h3>
+        <p class="lang-hi">प्राकृतिक आपदाओं के साथ-साथ, भविष्यवाणियां स्पष्ट रूप से महान वैश्विक संघर्षों और युद्ध के
+          छिड़ने का संकेत देती हैं। युद्ध की विभीषिका के खिलाफ सबसे मजबूत बचाव भक्ति से भरा हृदय है। भगवान माधव के प्रति
+          पूर्ण समर्पण और त्रिकाल संध्या का अभ्यास व्यक्तियों के चारों ओर एक अभेद्य सुरक्षा कवच बनाता है, जो उन्हें
+          सांसारिक दुखों और जन्म-मृत्यु के कष्टदायक चक्र से बचाता है।</p>
+      </div>
+
+      <div class="content-block">
+        <h3>करुणा का मार्ग: पांच स्तंभ</h3>
+        <p class="lang-hi">इस दिव्य सुरक्षा का आह्वान करने की पूर्ण कुंजी सभी जीवित प्राणियों के प्रति गहरी दया दिखाना
+          है। भगवान का कवच केवल उन्हीं को प्रदान किया जाता है जिनके हृदय में कोई क्रूरता नहीं होती। सच्चे भक्तों को
+          कड़ाई से पांच सर्वोच्च गुणों का पालन करना चाहिए: <strong>सत्य</strong> (Truth), <strong>क्षमा</strong>
+          (Forgiveness), <strong>दया</strong> (Kindness), <strong>शांति</strong> (Peace), और <strong>प्रेम</strong>
+          (Love)। प्रतिदिन इन सिद्धांतों को अपने जीवन में उतारकर, पशु/वनस्पति/सभी जीवों की रक्षा करके, और भगवान के नाम
+          (माधव) का जप करके, अनुयायी अपने पिछले कर्मों को शुद्ध करते हैं। यह आध्यात्मिक पवित्रता ही अंतिम कवच है, जो न
+          केवल वर्तमान सांसारिक विनाश से सुरक्षा की गारंटी देती है, बल्कि आगामी सत्य युग (सत्य का युग) में एक सुरक्षित,
+          धन्य प्रवेश भी सुनिश्चित करती है।</p>
+      </div>
+    </div>
+
+  </div>
+
+</main></ion-content>
