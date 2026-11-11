@@ -1,0 +1,60 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.ts-page {
+  min-height: 100%;
+  background-color: transparent;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.ts-header {
+  background: #fcfaf5; /* Light golden/cream background */
+  color: #996515; /* Dark golden font */
+  padding-top: calc(max(env(safe-area-inset-top, 0px), 44px) + 12px);
+  padding-bottom: 14px;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid #f1f5f9;
+
+  .header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 1.5rem; 
+    font-weight: 500;
+  }
+
+  .subtitle {
+    margin: 4px 0 0 0;
+    font-size: 0.95rem;
+    font-weight: 400;
+    opacity: 0.85;
+  }
+}
+
+.ts-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 0 40px 0;
+}
+
+@media (min-width: 769px) {
+  .ts-header {
+    padding-top: 20px;
+    padding-bottom: 16px;
+  }
+}

@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Noto+Serif+Devanagari:wght@400;600;700&display=swap" rel="stylesheet"/>
 <style>
         body { font-family: 'Noto Serif Devanagari', 'Noto Serif'; background-color: #f3f4f6; display: flex; flex-direction: column; align-items: center; padding: 20px 10px; }
-        .portrait-document { width: 100%; max-width: 210mm; background: white; box-sizing: border-box; padding: 0 0 20px 0; }
+        .portrait-document { width: 100%; max-width: 210mm; background: white; box-sizing: border-box; padding: 0 0 90px 0; }
         .pancharangi-banner { width: 100%; height: 16px; background-image: linear-gradient(to right, #ffffff 0%, #ffffff 20%, #ff0000 20%, #ff0000 40%, #16a34a 40%, #16a34a 60%, #facc15 60%, #facc15 80%, #1e3a8a 80%, #1e3a8a 100%); border-top: 1.7px solid #f59e0b; box-shadow: 0 2px 4px rgba(0,0,0,0.05); box-sizing: border-box; }
         .content-area { padding: 20px 30px; }
         .heading-red { color: #b91c1c; font-weight: 700; text-transform: uppercase; font-size: 1.25rem; letter-spacing: 0.05em; text-align: center; margin-bottom: 16px; margin-top: 24px; line-height: 1.2; }
@@ -24,9 +24,207 @@
         
         .text-body { font-size: 15.5px; } :lang(hi) .text-body, :lang(mr) .text-body, :lang(ne) .text-body, :lang(sa) .text-body, :lang(mai) .text-body, :lang(kok) .text-body, :lang(bho) .text-body, :lang(brx) .text-body, :lang(doi) .text-body, :lang(mag) .text-body, :lang(raj) .text-body, :lang(ks) .text-body, :lang(sd-deva) .text-body { font-size: 16.5px; }
 
-         @media print {
+         
+        /* Standalone Cover Page: Full Width High Resolution Darshan */
+        .cover-page {
+            width: 100%;
+            max-width: 210mm;
+            aspect-ratio: 390 / 561;
+            height: auto;
+            margin: 0 auto 20px auto;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffffff;
+            page-break-after: always;
+            break-after: page;
+        }
+
+        .cover-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* Responsive Mobile Layout & Header Alignment */
+        html, body {
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+        .portrait-document {
+            overflow-x: hidden;
+        }
+
+        .doc-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 1.5rem;
+            gap: 12px;
+            box-sizing: border-box;
+        }
+
+        .doc-header-logo {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        .doc-header-cover {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            flex-shrink: 0;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .doc-header-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            flex: 1 1 auto;
+            min-width: 0;
+            padding: 0 4px;
+        }
+
+        .doc-header-title-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .doc-header-om {
+            color: #991b1b;
+            font-size: 1.5rem;
+            line-height: 1;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .doc-header-title {
+            font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 1.85rem;
+            letter-spacing: 0.04em;
+            line-height: 1.15;
+            margin: 0;
+            text-align: center;
+        }
+
+        .doc-header-sub1 {
+            color: #991b1b;
+            text-transform: uppercase;
+            margin-top: 6px;
+            margin-bottom: 0;
+            font-size: 1rem;
+            line-height: 1.25;
+            font-weight: 600;
+        }
+
+        .doc-header-sub2 {
+            color: #991b1b;
+            margin-top: 4px;
+            margin-bottom: 0;
+            font-size: 1.05rem;
+            line-height: 1.25;
+            font-weight: 700;
+        }
+
+        /* Mobile Screens (Phones <= 640px) */
+        @media (max-width: 640px) {
+            html, body {
+                overflow-x: hidden !important;
+                max-width: 100vw !important;
+            }
+            body {
+                padding: 8px 3px !important;
+            }
+            .cover-page {
+                margin: 0 auto 12px auto !important;
+                border-radius: 6px !important;
+            }
+            .cover-image {
+                border-radius: 6px !important;
+            }
+            .portrait-document {
+                overflow-x: hidden !important;
+                max-width: 100% !important;
+            }
+            .content-area {
+                padding: 10px 4px !important;
+            }
+            .doc-header {
+                gap: 2px !important;
+                margin-bottom: 0.95rem !important;
+                align-items: center !important;
+            }
+            .doc-header-logo {
+                width: clamp(52px, 16vw, 75px) !important;
+                height: clamp(52px, 16vw, 75px) !important;
+            }
+            .doc-header-cover {
+                width: clamp(52px, 16vw, 75px) !important;
+                height: clamp(52px, 16vw, 75px) !important;
+                border-radius: 6px !important;
+            }
+            .doc-header-center {
+                padding: 0 1px !important;
+                justify-content: center !important;
+            }
+            .doc-header-title-row {
+                gap: 4px !important;
+            }
+            .doc-header-om {
+                font-size: clamp(1.02rem, 3.8vw, 1.35rem) !important;
+            }
+            .doc-header-title {
+                font-size: clamp(1.08rem, 4.1vw, 1.48rem) !important;
+                letter-spacing: 0.01em !important;
+                line-height: 1.15 !important;
+            }
+            .doc-header-sub1 {
+                font-size: clamp(0.74rem, 2.7vw, 0.94rem) !important;
+                margin-top: 4px !important;
+                line-height: 1.25 !important;
+                font-weight: 700 !important;
+            }
+            .doc-header-sub2 {
+                font-size: clamp(0.80rem, 2.9vw, 1.02rem) !important;
+                margin-top: 3px !important;
+                line-height: 1.25 !important;
+                font-weight: 700 !important;
+            }
+        }
+
+        @media print {
             @page { size: A4 portrait; margin: 0 !important; }
             body { background-color: white !important; -webkit-print-color-adjust: exact; margin: 0 !important; padding: 0 !important; }
+            .cover-page {
+                width: 100% !important;
+                max-width: 100% !important;
+                height: 100vh !important;
+                aspect-ratio: auto !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                box-shadow: none !important;
+                page-break-after: always !important;
+                break-after: page !important;
+            }
+            .cover-image {
+                width: 100% !important;
+                height: 100% !important;
+                object-fit: fill !important;
+            }
             .content-area { padding: 15px 12mm !important; }
             .no-print { display: none !important; }
             .web-shadow { box-shadow: none !important; }
@@ -35,22 +233,27 @@
     </style>
 </head>
 <body>
+<!-- 1. FULL PAGE COVER PAGE (IMAGE ONLY - RESPONSIVE FIT) -->
+<div class="cover-page web-shadow shadow-lg">
+<img alt="Trikala Sandhya" class="cover-image" src="trisandhya_cover_page.png"/>
+</div>
+<!-- 2. MAIN DOCUMENT -->
 <div class="portrait-document web-shadow">
 <div class="pancharangi-banner"></div>
 <div class="content-area">
 <!-- Document Header -->
-<div class="flex justify-between items-center w-full mb-6 avoid-page-break">
-<img alt="Logo" class="w-32 h-32 object-contain" src="sudharma_flag.svg"/>
-<div class="flex-col items-center flex text-center">
-<div class="flex items-center justify-center gap-4 w-full">
-<span class="text-red-800 text-2xl leading-none font-bold">ॐ</span>
-<h1 class="outline-title font-black text-3xl uppercase tracking-wider font-sans" data-action="transliterate" data-i18n="header_title">ತ್ರಿಕಾಲ ಸಂಧ್ಯಾ</h1>
-<span class="text-red-800 text-2xl leading-none font-bold">ॐ</span>
+<div class="doc-header flex justify-between items-center w-full mb-6 avoid-page-break">
+<img alt="Logo" class="doc-header-logo w-32 h-32 object-contain" src="sudharma_flag.svg"/>
+<div class="doc-header-center flex-col items-center flex text-center">
+<div class="doc-header-title-row flex items-center justify-center gap-4 w-full">
+<span class="doc-header-om text-red-800 text-2xl leading-none font-bold">ॐ</span>
+<h1 class="doc-header-title outline-title font-black text-3xl uppercase tracking-wider font-sans" data-action="transliterate" data-i18n="header_title">ತ್ರಿಕಾಲ ಸಂಧ್ಯಾ</h1>
+<span class="doc-header-om text-red-800 text-2xl leading-none font-bold">ॐ</span>
 </div>
-<h3 class="text-body text-red-800 mt-2 uppercase" data-action="transliterate" data-i18n="header_subtitle_1">ವಿಶ್ವ ಸನಾತನ ಧರ್ಮ ಸೇವಾ ಟ್ರಸ್ಟ್</h3>
-<h3 class="font-bold text-body text-red-800 mt-1" data-action="transliterate" data-i18n="header_subtitle_2">॥ ಜಯ ಶ್ರೀ ಮಾಧವ ॥</h3>
+<h3 class="doc-header-sub1 text-body text-red-800 mt-2 uppercase" data-action="transliterate" data-i18n="header_subtitle_1">ವಿಶ್ವ ಸನಾತನ ಧರ್ಮ ಸೇವಾ ಟ್ರಸ್ಟ್</h3>
+<h3 class="doc-header-sub2 font-bold text-body text-red-800 mt-1" data-action="transliterate" data-i18n="header_subtitle_2">॥ ಜಯ ಶ್ರೀ ಮಾಧವ ॥</h3>
 </div>
-<img alt="Kalki Bhagawan" class="w-32 h-32 rounded-lg object-contain shadow-sm" src="trisandhya_cover_page.png"/>
+<img alt="Kalki Bhagawan" class="doc-header-cover w-32 h-32 rounded-lg object-contain shadow-sm" src="trisandhya_cover_page.png"/>
 </div>
 <!-- FIRST PAGE: INTRODUCTORY ESSENCE & GUIDELINES -->
 <section class="avoid-page-break">

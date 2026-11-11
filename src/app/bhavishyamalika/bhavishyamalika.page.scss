@@ -1,3 +1,9 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .bm-page {
   min-height: 100%;
   background-color: transparent;
@@ -7,7 +13,10 @@
 .bm-header {
   background: #fcfaf5; /* Light golden/cream background */
   color: #996515; /* Dark golden font */
-  padding: 15px 20px 20px 20px; 
+  padding-top: calc(max(env(safe-area-inset-top, 0px), 44px) + 12px);
+  padding-bottom: 18px;
+  padding-left: 20px;
+  padding-right: 20px; 
   text-align: center;
   position: relative;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
@@ -201,7 +210,10 @@
 
 @media (max-width: 768px) {
   .bm-header {
-    padding: 15px 15px 20px 15px;
+    padding-top: calc(max(env(safe-area-inset-top, 0px), 44px) + 12px);
+    padding-bottom: 18px;
+    padding-left: 15px;
+    padding-right: 15px;
 
     .header-content {
       flex-direction: column;

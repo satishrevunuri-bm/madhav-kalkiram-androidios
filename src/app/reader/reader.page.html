@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar class="reader-toolbar">
     <ion-buttons slot="start">
       <ion-button (click)="goBack()">
         <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
@@ -19,7 +19,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<div class="reader-main">
   <!-- HTML Reader -->
   <div class="reader-container" *ngIf="documentType === 'html' && safeHtmlUrl">
     <iframe [src]="safeHtmlUrl" class="html-iframe"></iframe>
@@ -41,4 +41,4 @@
     <ion-icon name="alert-circle-outline"></ion-icon>
     <p>Unsupported document type.</p>
   </div>
-</ion-content>
+</div>

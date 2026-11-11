@@ -1,13 +1,22 @@
 import { Component } from '@angular/core';
+import { addIcons } from 'ionicons';
+import { home, book, documentText } from 'ionicons/icons';
 
 @Component({
   selector: 'app-tabs',
   templateUrl: 'tabs.page.html',
   styleUrls: ['tabs.page.scss'],
-  standalone: false,
+  standalone: false
 })
 export class TabsPage {
 
-  constructor() {}
+  constructor() {
+    addIcons({
+      home,
+      book,
+      documentText,
+      'document-text': documentText
+    });
+  }
 
 }
