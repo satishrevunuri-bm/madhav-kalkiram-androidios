@@ -9,7 +9,17 @@ import {
   arrowBack,
   removeCircleOutline,
   addCircleOutline,
-  alertCircleOutline
+  alertCircleOutline,
+  settings,
+  shieldCheckmarkOutline,
+  documentTextOutline,
+  globeOutline,
+  mailOutline,
+  openOutline,
+  chevronForwardOutline,
+  chevronDownOutline,
+  closeCircleOutline,
+  informationCircleOutline
 } from 'ionicons/icons';
 
 @Component({
@@ -32,7 +42,26 @@ export class AppComponent implements OnInit {
       addCircleOutline,
       'add-circle-outline': addCircleOutline,
       alertCircleOutline,
-      'alert-circle-outline': alertCircleOutline
+      'alert-circle-outline': alertCircleOutline,
+      settings,
+      shieldCheckmarkOutline,
+      'shield-checkmark-outline': shieldCheckmarkOutline,
+      documentTextOutline,
+      'document-text-outline': documentTextOutline,
+      globeOutline,
+      'globe-outline': globeOutline,
+      mailOutline,
+      'mail-outline': mailOutline,
+      openOutline,
+      'open-outline': openOutline,
+      chevronForwardOutline,
+      'chevron-forward-outline': chevronForwardOutline,
+      chevronDownOutline,
+      'chevron-down-outline': chevronDownOutline,
+      closeCircleOutline,
+      'close-circle-outline': closeCircleOutline,
+      informationCircleOutline,
+      'information-circle-outline': informationCircleOutline
     });
   }
 

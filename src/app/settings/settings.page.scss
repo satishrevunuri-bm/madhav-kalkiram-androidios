@@ -1,0 +1,375 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: #fcfaf5;
+}
+
+ion-content {
+  --background: #fcfaf5;
+  height: 100%;
+}
+
+.settings-top-spacer {
+  height: max(env(safe-area-inset-top, 0px), 12px);
+  width: 100%;
+}
+
+.settings-container {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 12px 16px 40px 16px;
+}
+
+/* Decorative pancharangi ribbon */
+.pancharangi-ribbon {
+  height: 3.5px;
+  width: 100%;
+  background: linear-gradient(
+    to right,
+    #ffffff 0%, #ffffff 20%,
+    #ff2a2a 20%, #ff2a2a 40%,
+    #ffd700 40%, #ffd700 60%,
+    #00cc00 60%, #00cc00 80%,
+    #00bfff 80%, #00bfff 100%
+  );
+  border-radius: 2px;
+  margin-bottom: 16px;
+}
+
+.settings-header {
+  text-align: center;
+  margin-bottom: 20px;
+
+  .header-title {
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: #996515;
+    margin: 0;
+  }
+
+  .header-subtitle {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin-top: 4px;
+  }
+}
+
+/* Brand Card */
+.brand-card {
+  background: #ffffff;
+  border: 1px solid #e2d9c8;
+  border-radius: 12px;
+  padding: 24px 16px;
+  text-align: center;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+  margin-bottom: 24px;
+
+  .brand-logo-icon {
+    font-size: 3rem;
+    color: #996515;
+    margin-bottom: 8px;
+    display: inline-block;
+  }
+
+  .brand-app-name {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #854d0e;
+    margin: 0 0 4px 0;
+  }
+
+  .brand-tagline {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin: 0 0 12px 0;
+  }
+
+  .version-badge {
+    display: inline-block;
+    background: #fef3c7;
+    color: #92400e;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 9999px;
+    margin-bottom: 12px;
+  }
+
+  .brand-author {
+    font-size: 0.85rem;
+    color: #334155;
+    margin: 0;
+  }
+
+  .brand-devotees {
+    font-size: 0.8rem;
+    color: #64748b;
+    margin: 2px 0 0 0;
+  }
+}
+
+/* Sections */
+.settings-section {
+  margin-bottom: 20px;
+
+  .section-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #854d0e;
+    margin: 0 0 8px 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    .section-icon {
+      font-size: 1rem;
+    }
+  }
+}
+
+.menu-card {
+  background: #ffffff;
+  border: 1px solid #e2d9c8;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+
+  &:active {
+    background: #f8fafc;
+  }
+
+  .menu-item-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    margin-right: 14px;
+    flex-shrink: 0;
+
+    &.shield-icon {
+      background: #ecfdf5;
+      color: #059669;
+    }
+
+    &.terms-icon {
+      background: #eff6ff;
+      color: #2563eb;
+    }
+
+    &.web-icon {
+      background: #fef3c7;
+      color: #d97706;
+    }
+
+    &.mail-icon {
+      background: #f5f3ff;
+      color: #7c3aed;
+    }
+  }
+
+  .menu-item-content {
+    flex: 1;
+
+    .menu-item-title {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #1e293b;
+    }
+
+    .menu-item-subtitle {
+      font-size: 0.76rem;
+      color: #64748b;
+      margin-top: 2px;
+    }
+  }
+
+  .menu-item-arrow {
+    font-size: 1.1rem;
+    color: #94a3b8;
+    margin-left: 8px;
+    transition: transform 0.2s ease;
+
+    &.rotated {
+      transform: rotate(90deg);
+      color: #996515;
+    }
+  }
+}
+
+.menu-divider {
+  height: 1px;
+  background: #f1f5f9;
+  margin: 0 16px 0 66px;
+}
+
+/* Inline Expanded Legal Content Box */
+.expanded-document-box {
+  background: #fdfcf9;
+  border-top: 1px dashed #e2d9c8;
+  padding: 16px 18px 20px 18px;
+  animation: fadeIn 0.2s ease-in-out;
+
+  .doc-badge {
+    display: inline-block;
+    background: #fef3c7;
+    color: #92400e;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    margin-bottom: 8px;
+  }
+
+  h4 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #854d0e;
+    margin: 0 0 4px 0;
+  }
+
+  .doc-meta {
+    font-size: 0.78rem;
+    color: #64748b;
+    margin: 2px 0;
+  }
+
+  .doc-highlight {
+    background: #f0fdf4;
+    border-left: 3px solid #16a34a;
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin: 12px 0;
+    font-size: 0.82rem;
+    color: #166534;
+    line-height: 1.45;
+  }
+
+  h5 {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #854d0e;
+    margin: 14px 0 6px 0;
+  }
+
+  p {
+    font-size: 0.82rem;
+    color: #374151;
+    line-height: 1.5;
+    margin: 0 0 8px 0;
+  }
+
+  ul {
+    padding-left: 18px;
+    margin: 0 0 10px 0;
+
+    li {
+      font-size: 0.8rem;
+      color: #374151;
+      margin-bottom: 4px;
+      line-height: 1.4;
+    }
+  }
+
+  .btn-web-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #fef3c7;
+    color: #92400e;
+    border: 1px solid #fde68a;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 10px;
+
+    &:hover, &:active {
+      background: #fde68a;
+    }
+
+    ion-icon {
+      font-size: 1rem;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Principles box */
+.principles-box {
+  background: #fefce8;
+  border: 1px solid #fef08a;
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+  margin-bottom: 24px;
+
+  .principles-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 8px;
+
+    .om-symbol {
+      color: #b91c1c;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #854d0e;
+      margin: 0;
+    }
+  }
+
+  .principles-text {
+    font-size: 0.8rem;
+    color: #713f12;
+    margin: 0 0 6px 0;
+    line-height: 1.4;
+  }
+
+  .mantra-text {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #b91c1c;
+    margin: 0;
+  }
+}
+
+.settings-footer {
+  text-align: center;
+  padding: 12px 0;
+
+  p {
+    font-size: 0.78rem;
+    color: #94a3b8;
+    margin: 0;
+  }
+
+  .footer-note {
+    font-size: 0.72rem;
+    margin-top: 4px;
+    color: #a1a1aa;
+  }
+}

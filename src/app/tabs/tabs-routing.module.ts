@@ -20,6 +20,10 @@ const routes: Routes = [
         loadChildren: () => import('../trisandhya/trisandhya.module').then(m => m.TrisandhyaPageModule)
       },
       {
+        path: 'settings',
+        loadChildren: () => import('../settings/settings.module').then(m => m.SettingsPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/home',
         pathMatch: 'full'

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { addIcons } from 'ionicons';
-import { home, book, documentText } from 'ionicons/icons';
+import { home, book, documentText, settings } from 'ionicons/icons';
 
 @Component({
   selector: 'app-tabs',
@@ -15,7 +15,8 @@ export class TabsPage {
       home,
       book,
       documentText,
-      'document-text': documentText
+      'document-text': documentText,
+      settings
     });
   }
 

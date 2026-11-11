@@ -1,0 +1,264 @@
+<ion-content>
+  <!-- Minimal status bar spacer for safe area on mobile devices -->
+  <div class="settings-top-spacer"></div>
+
+  <main class="settings-container">
+    <!-- Top Decorative Ribbon -->
+    <div class="pancharangi-ribbon"></div>
+
+    <!-- Page Header -->
+    <header class="settings-header">
+      <h1 class="header-title">Settings &amp; About</h1>
+      <p class="header-subtitle">सेटिंग्स और जानकारी</p>
+    </header>
+
+    <!-- App Brand & Version Card -->
+    <div class="brand-card">
+      <div class="brand-logo-icon">🪷</div>
+      <h2 class="brand-app-name">Trisandhya - Kalkiram</h2>
+      <p class="brand-tagline">Trisandhya &amp; Bhavishya Malika</p>
+      <div class="version-badge">
+        <span>Version {{ appVersion }} (Build {{ buildNumber }})</span>
+      </div>
+      <p class="brand-author">Developed by <strong>{{ developerName }}</strong></p>
+      <p class="brand-devotees">({{ communityName }})</p>
+    </div>
+
+    <!-- Section: Legal & Compliance -->
+    <section class="settings-section">
+      <h3 class="section-title">
+        <span class="section-icon">⚖️</span> Legal &amp; Transparency
+      </h3>
+
+      <div class="menu-card">
+        <!-- Privacy Policy Header Item -->
+        <div class="menu-item" (click)="toggleSection('privacy')" role="button" tabindex="0">
+          <div class="menu-item-icon shield-icon">
+            <ion-icon name="shield-checkmark-outline"></ion-icon>
+          </div>
+          <div class="menu-item-content">
+            <div class="menu-item-title">Privacy Policy</div>
+            <div class="menu-item-subtitle">Zero data collection, no ads, 100% privacy</div>
+          </div>
+          <ion-icon [name]="expandedSection === 'privacy' ? 'chevron-down-outline' : 'chevron-forward-outline'"
+            class="menu-item-arrow" [class.rotated]="expandedSection === 'privacy'">
+          </ion-icon>
+        </div>
+
+        <!-- Privacy Policy Inline Expandable Document -->
+        <div *ngIf="expandedSection === 'privacy'" class="expanded-document-box">
+          <div class="doc-badge">Official Legal Document</div>
+          <h4>Privacy Policy</h4>
+          <p class="doc-meta"><strong>Developed by:</strong> kalkiram_madhav (Devotees of Lord Madhav)</p>
+          <p class="doc-meta"><strong>Effective Date:</strong> October 27, 2026</p>
+
+          <div class="doc-highlight">
+            🛡️ <strong>Summary:</strong> We respect your privacy. The Kalkiram app is purely spiritual and educational.
+            We do <strong>not</strong> collect, store, sell, or share any personal information, and our app does
+            <strong>not</strong> serve any advertisements.
+          </div>
+
+          <h5>1. Introduction</h5>
+          <p>This Privacy Policy explains how the developer <strong>kalkiram_madhav</strong> ("we", "us", or "our",
+            representing Devotees of Lord Madhav) manages user information in connection with the mobile application
+            <strong>Kalkiram</strong> (including its Bhavishya Malika guidance, Trisandhya prayer schedule, multilingual
+            PDFs, and audio features).
+          </p>
+
+          <h5>2. Information Collection and Use</h5>
+          <p>The application is designed to function with complete user privacy:</p>
+          <ul>
+            <li><strong>No Account Required:</strong> You do not need to register, log in, or provide an email address,
+              phone number, or name to use the app.</li>
+            <li><strong>No Personal Data Collection:</strong> We do not collect your personal identity, contact details,
+              precise location, contacts, or financial information.</li>
+            <li><strong>No Tracking:</strong> We do not track your activity across other applications or websites.</li>
+          </ul>
+
+          <h5>3. Device Permissions &amp; How They Are Used</h5>
+          <p>The application requests only minimal, necessary device permissions strictly required to provide its core
+            spiritual features:</p>
+          <ul>
+            <li><strong>Internet Access (<code>android.permission.INTERNET</code>):</strong> Required exclusively to
+              download and stream multilingual Bhavishya Malika PDFs and Trisandhya audio files in 125+ languages from
+              official servers.</li>
+            <li><strong>Network State (<code>android.permission.ACCESS_NETWORK_STATE</code>):</strong> Used to determine
+              whether your device has an active internet connection before initiating PDF downloads or audio streams.
+            </li>
+            <li><strong>Local Storage / Preferences:</strong> Used locally on your device to store offline downloaded
+              PDFs, bookmark your reading position, and remember your language preference. This data never leaves your
+              device.</li>
+          </ul>
+
+          <h5>4. Advertising and Analytics</h5>
+          <ul>
+            <li><strong>No Advertisements:</strong> The app contains zero third-party ads. We do not use AdMob or any
+              other advertising SDK.</li>
+            <li><strong>No Third-Party Trackers:</strong> We do not integrate data brokers, behavioral analytics, or
+              marketing trackers.</li>
+          </ul>
+
+          <h5>5. Children’s Privacy</h5>
+          <p>Our application contains religious, spiritual, and educational content that is safe for individuals of all
+            ages. Because we do not collect any personal information whatsoever, we do not knowingly solicit or collect
+            data from children under the age of 13 in accordance with COPPA, GDPR-K, and applicable global child privacy
+            laws.</p>
+
+          <h5>6. Data Security</h5>
+          <p>All network communications between the application and servers (for retrieving PDFs and audio) are
+            conducted over industry-standard encrypted HTTPS (SSL/TLS) connections.</p>
+
+          <h5>7. Changes to This Privacy Policy</h5>
+          <p>We may update this Privacy Policy from time to time. Any changes will be posted directly to this document
+            and our official web link with an updated effective date.</p>
+
+          <h5>8. Contact Us</h5>
+          <p>If you have any questions or feedback regarding this Privacy Policy, please reach out:</p>
+          <ul>
+            <li><strong>Developer:</strong> kalkiram_madhav (Devotees of Lord Madhav)</li>
+            <li><strong>Support Email:</strong> {{ supportEmail }}</li>
+            <li><strong>Community Reference:</strong> {{ websiteUrl }}</li>
+          </ul>
+
+          <a class="btn-web-link" (click)="openExternal(privacyUrl); $event.stopPropagation()">
+            <ion-icon name="open-outline"></ion-icon>
+            View Live on GitHub Pages
+          </a>
+        </div>
+
+        <div class="menu-divider"></div>
+
+        <!-- Terms & Conditions Header Item -->
+        <div class="menu-item" (click)="toggleSection('terms')" role="button" tabindex="0">
+          <div class="menu-item-icon terms-icon">
+            <ion-icon name="document-text-outline"></ion-icon>
+          </div>
+          <div class="menu-item-content">
+            <div class="menu-item-title">Terms &amp; Conditions</div>
+            <div class="menu-item-subtitle">Devotional guidelines &amp; spiritual contemplation</div>
+          </div>
+          <ion-icon [name]="expandedSection === 'terms' ? 'chevron-down-outline' : 'chevron-forward-outline'"
+            class="menu-item-arrow" [class.rotated]="expandedSection === 'terms'">
+          </ion-icon>
+        </div>
+
+        <!-- Terms & Conditions Inline Expandable Document -->
+        <div *ngIf="expandedSection === 'terms'" class="expanded-document-box">
+          <div class="doc-badge">Official Legal Document</div>
+          <h4>Terms &amp; Conditions</h4>
+          <p class="doc-meta"><strong>Developed by:</strong> kalkiram_madhav (Devotees of Lord Madhav)</p>
+          <p class="doc-meta"><strong>Effective Date:</strong> October 27, 2026</p>
+
+          <div class="doc-highlight">
+            📜 <strong>Summary:</strong> The Kalkiram application is a non-commercial, devotional, and educational
+            platform provided free of cost for spiritual contemplation and welfare. By using this application, you agree
+            to these Terms and Conditions.
+          </div>
+
+          <h5>1. Acceptance of Terms</h5>
+          <p>By downloading, installing, accessing, or using the <strong>Kalkiram</strong> mobile application, you agree
+            to be bound by these Terms and Conditions ("Terms"). If you do not agree with any part of these Terms, you
+            must discontinue using the application.</p>
+
+          <h5>2. Spiritual, Educational &amp; Devotional Purpose</h5>
+          <p>The application provides access to sacred spiritual guidance, including Bhavishya Malika prophecies,
+            Trikala Sandhya prayers, mantras, and multilingual texts. The content is presented exclusively for spiritual
+            upliftment, personal contemplation, and devotional welfare.</p>
+          <ul>
+            <li><strong>Spiritual Contemplation:</strong> Prophecies, historical scripts, and spiritual guidance are
+              based on ancient prophetic traditions and scriptures. They are intended for philosophical, moral, and
+              devotional reflection.</li>
+            <li><strong>No Professional Advice:</strong> The content provided within the app does not constitute legal,
+              financial, or medical advice and should not be relied upon as such.</li>
+          </ul>
+
+          <h5>3. Free &amp; Non-Commercial Access</h5>
+          <p>The Kalkiram application is provided entirely free of charge to all devotees and seekers worldwide:</p>
+          <ul>
+            <li><strong>No Subscriptions or Fees:</strong> There are no mandatory subscriptions, hidden costs, or in-app
+              purchases.</li>
+            <li><strong>No Advertisements:</strong> The application does not host or display commercial advertisements
+              or sponsored third-party banners.</li>
+          </ul>
+
+          <h5>4. Intellectual Property &amp; Sacred Texts</h5>
+          <p>All scriptures, spiritual compilations, translations, artwork, and audio recitations provided within the
+            application are made available for personal, devotional, and non-commercial study only:</p>
+          <ul>
+            <li>You may download and read the multilingual PDFs for personal spiritual practice.</li>
+            <li>You may not modify, distribute, sell, license, or exploit any app content for commercial profit without
+              explicit prior written authorization.</li>
+          </ul>
+
+          <h5>5. User Conduct</h5>
+          <p>Users are expected to engage with the application and its sacred content with respect, reverent devotion,
+            and peaceful intent. You agree not to attempt to reverse engineer or disrupt the application's
+            infrastructure.</p>
+
+          <h5>6. Disclaimer of Warranties &amp; Limitation of Liability</h5>
+          <p>The application is provided on an "AS IS" and "AS AVAILABLE" basis. The developer makes no warranties
+            regarding uninterrupted server uptime. To the maximum extent permitted by applicable law, the developer
+            shall not be liable for any indirect or consequential damages.</p>
+
+          <h5>7. Modifications to Terms</h5>
+          <p>We reserve the right to revise or update these Terms and Conditions at any time. Continued use of the
+            application after changes constitutes your acceptance of the revised Terms.</p>
+
+          <h5>8. Contact Information</h5>
+          <p>For questions or feedback regarding these Terms, contact:</p>
+          <ul>
+            <li><strong>Developer:</strong> kalkiram_madhav (Devotees of Lord Madhav)</li>
+            <li><strong>Support Email:</strong> {{ supportEmail }}</li>
+            <li><strong>Community Reference:</strong> {{ websiteUrl }}</li>
+          </ul>
+
+          <a class="btn-web-link" (click)="openExternal(termsUrl); $event.stopPropagation()">
+            <ion-icon name="open-outline"></ion-icon>
+            View Live on GitHub Pages
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Community & Support -->
+    <section class="settings-section">
+      <h3 class="section-title">
+        <span class="section-icon">🌐</span> Community &amp; Contact
+      </h3>
+
+      <div class="menu-card">
+        <!-- Official Website -->
+        <div class="menu-item" (click)="openExternal(websiteUrl)" role="button" tabindex="0">
+          <div class="menu-item-icon web-icon">
+            <ion-icon name="globe-outline"></ion-icon>
+          </div>
+          <div class="menu-item-content">
+            <div class="menu-item-title">Official Website</div>
+            <div class="menu-item-subtitle">{{ websiteUrl }}</div>
+          </div>
+          <ion-icon name="open-outline" class="menu-item-arrow"></ion-icon>
+        </div>
+
+        <div class="menu-divider"></div>
+
+        <!-- Support Email -->
+        <div class="menu-item" (click)="sendEmail()" role="button" tabindex="0">
+          <div class="menu-item-icon mail-icon">
+            <ion-icon name="mail-outline"></ion-icon>
+          </div>
+          <div class="menu-item-content">
+            <div class="menu-item-title">Developer Support</div>
+            <div class="menu-item-subtitle">{{ supportEmail }}</div>
+          </div>
+          <ion-icon name="mail-outline" class="menu-item-arrow"></ion-icon>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="settings-footer">
+      <p>&copy; 2026 {{ developerName }} · {{ communityName }}</p>
+      <p class="footer-note">All scriptures &amp; translations shared freely for spiritual welfare.</p>
+    </footer>
+  </main>
+</ion-content>
