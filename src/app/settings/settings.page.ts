@@ -20,11 +20,12 @@ import {
   standalone: false
 })
 export class SettingsPage {
+  appName = 'Trisandhya - Kalkiram';
   appVersion = '1.0.10';
   buildNumber = '11';
   developerName = 'kalkiram_madhav';
   communityName = 'Devotees of Lord Madhav';
-  supportEmail = 'satish.revunuri@gmail.com';
+  supportEmail = 'kalkirammadhav3234@gmail.com';
   websiteUrl = 'https://kalkiram.com';
   privacyUrl = 'https://satishrevunuri-bm.github.io/madhav-kalkiram-androidios/';
   termsUrl = 'https://satishrevunuri-bm.github.io/madhav-kalkiram-androidios/terms.html';
@@ -68,6 +69,6 @@ export class SettingsPage {
   }
 
   sendEmail() {
-    window.location.href = `mailto:${this.supportEmail}?subject=Kalkiram%20App%20Support`;
+    window.location.href = `mailto:${this.supportEmail}?subject=Trisandhya%20-%20Kalkiram%20App%20Support`;
   }
 }
