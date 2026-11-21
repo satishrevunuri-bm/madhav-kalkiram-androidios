@@ -21,8 +21,8 @@ import {
 })
 export class SettingsPage {
   appName = 'Trisandhya - Kalkiram';
-  appVersion = '1.0.10';
-  buildNumber = '11';
+  appVersion = '1.0.11';
+  buildNumber = '12';
   developerName = 'kalkiram_madhav';
   communityName = 'Devotees of Lord Madhav';
   supportEmail = 'kalkirammadhav3234@gmail.com';
