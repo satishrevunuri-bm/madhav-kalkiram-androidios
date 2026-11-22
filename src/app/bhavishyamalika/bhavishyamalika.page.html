@@ -3,57 +3,209 @@
     <div class="bm-header">
       <div class="header-content">
         <h1>Bhavishya Malika - An Overview</h1>
-        <p class="subtitle">Available in 127 Languages</p>
+        <p class="subtitle">Available in 130 Languages</p>
       </div>
     </div>
 
     <div class="bm-container">
-      <div class="search-container">
-        <div class="search-wrapper">
-          <span class="search-icon">🔍</span>
-          <input 
-            type="text" 
-            placeholder="Search languages..." 
-            [ngModel]="searchQuery()"
-            (ngModelChange)="searchQuery.set($event)"
-            class="search-input"
-          >
+      <!-- Search & Language Selector Trigger Bar -->
+      <div class="search-trigger-container" (click)="openSearchModal()" role="button" tabindex="0">
+        <div class="search-trigger-bar">
+          <div class="search-left">
+            <span class="search-icon">🔍</span>
+            <span class="search-placeholder">Search language or select from A–Z badges...</span>
+          </div>
+          <span class="badge-count-pill">{{ languages.length }} Languages ➔</span>
         </div>
       </div>
 
-      <div class="languages-grid">
-        @for (lang of filteredLanguages(); track lang.code) {
-          <div class="language-card-compact">
-            <div class="card-info">
-              <div class="bm-title">
-                <span class="native">{{ lang.nativeTitle }}</span>
-                @if (lang.englishTitle) {
-                  <span class="en-title">({{ lang.englishTitle }})</span>
-                }
-              </div>
-              
-              <div class="lang-name">
-                <span style="font-weight: 500; color: #0d47a1;">
-                  {{ getFormattedTitle(lang).main }}
-                  @if (getFormattedTitle(lang).iast) {
-                    <span style="font-size: 0.65rem; background: #eef2ff; color: #4f46e5; padding: 2px 5px; border-radius: 4px; margin-left: 6px; font-weight: 600; vertical-align: middle;">IAST</span>
-                  }
-                </span>
-              </div>
-            </div>
-            
-            <div style="display: flex; justify-content: flex-end;">
-              <a [routerLink]="['/reader']" [queryParams]="{ url: '/assets' + lang.viewUrl }" class="btn-view-compact">
-                View
-              </a>
-            </div>
+      <!-- PINNED LANGUAGES SECTION (Visible if any are pinned) -->
+      @if (getPinnedLanguages().length > 0) {
+        <div class="pinned-section">
+          <div class="section-banner">
+            <span class="banner-icon">📌</span>
+            <span class="banner-title">Pinned Bhavishya Malika / पसंदीदा भविष्य मालिका</span>
+            <span class="banner-count">({{ getPinnedLanguages().length }})</span>
           </div>
-        } @empty {
-          <div class="no-results">
-            <p>No languages found matching "{{ searchQuery() }}"</p>
+
+          <div class="languages-grid">
+            @for (lang of getPinnedLanguages(); track lang.code) {
+              <div class="language-card-compact is-pinned"
+                   [id]="'bm-card-' + lang.code"
+                   [class.highlight-tile]="highlightedCardCode === lang.code">
+                <div class="card-info">
+                  <div class="bm-title">
+                    <span class="native">{{ lang.nativeTitle }}</span>
+                    @if (lang.englishTitle) {
+                      <span class="en-title">({{ lang.englishTitle }})</span>
+                    }
+                  </div>
+
+                  <div class="lang-name">
+                    <span style="font-weight: 500; color: #0d47a1;">
+                      {{ getFormattedTitle(lang).main }}
+                      @if (getFormattedTitle(lang).iast) {
+                        <span class="iast-tag">IAST</span>
+                      }
+                    </span>
+                  </div>
+                </div>
+
+                <div class="card-actions">
+                  <button type="button" class="btn-pin pinned" (click)="togglePin(lang, $event)" title="Unpin from top">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#b45309" class="pin-svg">
+                      <path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6h1.6v-6H18v-2l-2-2z"/>
+                    </svg>
+                  </button>
+                  <a [routerLink]="['/reader']" [queryParams]="{ url: '/assets' + lang.viewUrl }" class="btn-view-compact">
+                    View
+                  </a>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      }
+
+      <!-- ALL / UNPINNED LANGUAGES SECTION -->
+      <div class="all-languages-section">
+        @if (getPinnedLanguages().length > 0) {
+          <div class="section-sub-header">
+            <span>All Languages (A–Z) / सभी भाषाएँ</span>
           </div>
         }
+
+        <div class="languages-grid">
+          @for (lang of getUnpinnedLanguages(); track lang.code) {
+            <div class="language-card-compact"
+                 [id]="'bm-card-' + lang.code"
+                 [class.highlight-tile]="highlightedCardCode === lang.code">
+              <div class="card-info">
+                <div class="bm-title">
+                  <span class="native">{{ lang.nativeTitle }}</span>
+                  @if (lang.englishTitle) {
+                    <span class="en-title">({{ lang.englishTitle }})</span>
+                  }
+                </div>
+
+                <div class="lang-name">
+                  <span style="font-weight: 500; color: #0d47a1;">
+                    {{ getFormattedTitle(lang).main }}
+                    @if (getFormattedTitle(lang).iast) {
+                      <span class="iast-tag">IAST</span>
+                    }
+                  </span>
+                </div>
+              </div>
+
+              <div class="card-actions">
+                <button type="button" class="btn-pin" (click)="togglePin(lang, $event)" title="Pin to top">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" class="pin-svg">
+                    <path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6h1.6v-6H18v-2l-2-2z"/>
+                  </svg>
+                </button>
+                <a [routerLink]="['/reader']" [queryParams]="{ url: '/assets' + lang.viewUrl }" class="btn-view-compact">
+                  View
+                </a>
+              </div>
+            </div>
+          }
+        </div>
       </div>
+
     </div>
   </div>
 </ion-content>
+
+<!-- ======================================================== -->
+<!-- BHAVISHYA MALIKA LANGUAGE SELECTION BADGE POPUP MODAL     -->
+<!-- ======================================================== -->
+@if (isSearchModalOpen) {
+  <div class="modal-backdrop" (click)="closeSearchModal()">
+    <div class="modal-card" (click)="$event.stopPropagation()">
+
+      <!-- Clean Pancharangi Color Strip at Top (Zero Artifacts) -->
+      <div class="pancharangi-top-strip"></div>
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <div class="modal-title-box">
+          <span class="modal-title">Select Language / भाषा चुनें</span>
+          <span class="modal-sub">Total {{ languages.length }} Languages in Alphabetical Order</span>
+        </div>
+        <button type="button" class="btn-close-modal" (click)="closeSearchModal()" aria-label="Close">
+          ✕
+        </button>
+      </div>
+
+      <!-- Quick Filter Search Input inside Modal -->
+      <div class="modal-search-wrapper">
+        <span class="modal-search-icon">🔍</span>
+        <input type="text"
+               [(ngModel)]="modalSearchQuery"
+               placeholder="Type to filter e.g. Telugu, Russian, Odia..."
+               class="modal-search-input" />
+        @if (modalSearchQuery) {
+          <button type="button" class="btn-clear-query" (click)="modalSearchQuery = ''">✕</button>
+        }
+      </div>
+
+      <!-- Top Languages Quick Access -->
+      <div class="modal-top-section">
+        <div class="section-label">Top Languages / मुख्य भाषाएँ</div>
+        <div class="badges-row">
+          @for (topLang of getTopLanguages(); track topLang.code) {
+            <button type="button"
+                    class="badge-chip top-chip"
+                    [class.is-active-pin]="isPinned(topLang)"
+                    (click)="selectLanguageFromModal(topLang)">
+              <span class="chip-star">★</span>
+              <span>{{ getFormattedTitle(topLang).main }}</span>
+              @if (isPinned(topLang)) {
+                <span class="chip-pin">📌</span>
+              }
+            </button>
+          }
+        </div>
+      </div>
+
+      <!-- All Language Badges Grouped by Letter with Horizontal Separators -->
+      <div class="modal-badges-container">
+        @for (group of getLanguageGroups(); track group.letter) {
+          <div class="letter-group">
+            <div class="letter-separator">
+              <span class="letter-badge">{{ group.letter }}</span>
+              <div class="separator-line"></div>
+            </div>
+            <div class="badges-cloud">
+              @for (bLang of group.languages; track bLang.code) {
+                <button type="button"
+                        class="badge-chip"
+                        [class.is-active-pin]="isPinned(bLang)"
+                        (click)="selectLanguageFromModal(bLang)">
+                  <span>{{ getFormattedTitle(bLang).main }}</span>
+                  @if (isPinned(bLang)) {
+                    <span class="chip-pin">📌</span>
+                  }
+                </button>
+              }
+            </div>
+          </div>
+        }
+
+        @if (getLanguageGroups().length === 0) {
+          <div class="modal-no-results">
+            No language found matching "{{ modalSearchQuery }}".
+          </div>
+        }
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <span class="footer-hint">Tap any language to pin it to top</span>
+        <button type="button" class="btn-done" (click)="closeSearchModal()">Done</button>
+      </div>
+
+    </div>
+  </div>
+}

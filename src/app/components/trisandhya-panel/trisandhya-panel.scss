@@ -3,11 +3,8 @@ $brand-gold: #a67c00;
 $brand-blue: #00478f;
 $border-light: #e2e8f0;
 $bg-header: #fcfaf5;
-/* Subtle warm/cream tint for the resting state */
 $bg-header-hover: #f3efe6;
-/* Slightly deeper warm tint for the hover state */
 $bg-btn-hover: #fcfaf5;
-/* Keep button hovers very light */
 
 .panel-container {
   margin: 10px auto 30px auto;
@@ -25,7 +22,6 @@ $bg-btn-hover: #fcfaf5;
 
   background: $bg-header;
   color: #996515;
-  /* The rich text color you requested */
 
   /* --- The Thick Pancharangi Block Border --- */
   border-top: 8px solid;
@@ -34,20 +30,13 @@ $bg-btn-hover: #fcfaf5;
   border-right: none;
   border-image: linear-gradient(to right,
       #ffffff 0%, #ffffff 20%,
-      /* White Block */
       #ff2a2a 20%, #ff2a2a 40%,
-      /* Red Block */
       #FFD700 40%, #FFD700 60%,
-      /* Gold Block */
       #00cc00 60%, #00cc00 80%,
-      /* Green Block */
       #00bfff 80%, #00bfff 100%
-      /* Sky Blue Block */
     ) 1;
 
-  /* THE FIX: A very soft, elegant drop shadow that gently lifts the header off the white page */
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-
   border-radius: 0 0 6px 6px;
   cursor: pointer;
   transition: background 0.2s ease, box-shadow 0.2s ease;
@@ -65,7 +54,6 @@ $bg-btn-hover: #fcfaf5;
   &:hover {
     background: $bg-header-hover;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-    /* Shadow deepens slightly on hover */
   }
 }
 
@@ -73,29 +61,97 @@ $bg-btn-hover: #fcfaf5;
   padding: 20px 0;
 }
 
-.search-container {
-  margin-bottom: 25px;
+/* --- Search & Select Language Trigger Bar --- */
+.search-trigger-container {
+  margin-bottom: 20px;
+  cursor: pointer;
 
-  .search-input {
+  .search-trigger-bar {
     width: 100%;
-    padding: 12px 15px;
-    font-size: 0.95rem;
-    border: 1px solid $border-light;
-    border-radius: 4px;
-    color: $brand-blue;
-    outline: none;
-    transition: border-color 0.2s;
+    padding: 12px 16px;
+    background: #ffffff;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+    transition: all 0.2s ease;
 
-    &::placeholder {
-      color: #9ca3af;
+    &:hover {
+      border-color: $brand-blue;
+      box-shadow: 0 4px 12px rgba(0, 71, 143, 0.08);
     }
 
-    &:focus {
-      border-color: $brand-blue;
+    .search-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+
+      .search-icon {
+        font-size: 1.1rem;
+      }
+
+      .search-placeholder {
+        color: #64748b;
+        font-size: 0.92rem;
+      }
+    }
+
+    .badge-count-pill {
+      background: #eff6ff;
+      color: $brand-blue;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      border: 1px solid #bfdbfe;
+      white-space: nowrap;
     }
   }
 }
 
+/* --- Pinned Section Banner --- */
+.pinned-section {
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border: 1px solid #fde68a;
+  border-radius: 8px;
+  padding: 14px;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.06);
+
+  .section-banner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #92400e;
+
+    .banner-icon {
+      font-size: 1.1rem;
+    }
+
+    .banner-count {
+      font-size: 0.85rem;
+      color: #b45309;
+    }
+  }
+}
+
+.section-sub-header {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* --- Grid & Tiles --- */
 .tiles-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -111,9 +167,9 @@ $bg-btn-hover: #fcfaf5;
   flex-direction: column;
   gap: 12px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
-  transition: all 0.2s;
+  transition: all 0.2s ease;
+  position: relative;
 
-  /* Forces the browser to skip rendering the heavy audio players for off-screen tiles */
   content-visibility: auto;
   contain-intrinsic-size: auto 120px;
 
@@ -121,11 +177,95 @@ $bg-btn-hover: #fcfaf5;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
     border-color: #cbd5e1;
   }
+
+  &.is-pinned {
+    border-color: #fde68a;
+    box-shadow: 0 2px 6px rgba(217, 119, 6, 0.05);
+  }
+
+  &.highlight-tile {
+    animation: goldPulse 1.2s ease-in-out infinite alternate;
+    border-color: #d97706 !important;
+    background: #fffdfa !important;
+    z-index: 10;
+  }
+}
+
+@keyframes goldPulse {
+  0% {
+    box-shadow: 0 0 4px rgba(217, 119, 6, 0.3);
+    transform: scale(1);
+  }
+  100% {
+    box-shadow: 0 0 16px rgba(217, 119, 6, 0.65);
+    transform: scale(1.02);
+  }
+}
+
+.tile-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  .tile-title-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    .tile-title {
+      font-weight: 500;
+      color: #0d47a1;
+      font-size: 1rem;
+      line-height: 1.2;
+
+      .iast-tag {
+        font-size: 0.65rem;
+        background: #eef2ff;
+        color: #4f46e5;
+        padding: 2px 5px;
+        border-radius: 4px;
+        margin-left: 6px;
+        font-weight: 600;
+        vertical-align: middle;
+      }
+    }
+  }
 }
 
 .tile-actions {
   display: flex;
-  gap: 8px;
+  align-items: center;
+  gap: 6px;
+
+  .btn-pin {
+    background: transparent;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 0;
+
+    .pin-svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    &:hover {
+      background: #f1f5f9;
+      border-color: #94a3b8;
+    }
+
+    &.pinned {
+      background: #fef3c7;
+      border-color: #f59e0b;
+    }
+  }
 
   .btn {
     text-align: center;
@@ -136,6 +276,16 @@ $bg-btn-hover: #fcfaf5;
     background-color: white;
     border: 1px solid $brand-gold;
     color: $brand-gold;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+
+    .pdf-icon {
+      width: 14px;
+      height: 14px;
+    }
 
     &:hover {
       background-color: $bg-btn-hover;
@@ -144,16 +294,357 @@ $bg-btn-hover: #fcfaf5;
   }
 }
 
-.no-results {
-  grid-column: 1 / -1;
-  text-align: center;
-  padding: 40px;
-  color: $brand-blue;
-  font-size: 1rem;
+.tile-audio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+
+  .listen-text {
+    font-size: 0.75rem;
+    color: #d97706;
+    font-style: italic;
+    margin-left: 2px;
+  }
+
+  .audio-controls-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+
+    .audio-player {
+      flex: 1;
+      height: 36px;
+      outline: none;
+    }
+
+    .btn-audio-download {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 4px;
+      background-color: white;
+      border: 1px solid $brand-blue;
+      color: $brand-blue;
+      transition: all 0.2s;
+
+      .audio-dl-icon {
+        width: 18px;
+        height: 18px;
+      }
+
+      &:hover {
+        background: #eff6ff;
+      }
+    }
+  }
 }
 
-/* Instantly removes the panel from the render tree without destroying DOM memory */
-/* The absolute fastest way to hide massive DOM structures on mobile */
+.audio-placeholder {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+/* --- LANGUAGE SELECTION MODAL POPUP --- */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.modal-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 620px;
+  max-height: 86vh;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+  border: none;
+  animation: modalSlideUp 0.22s ease-out;
+}
+
+/* Crisp Top Pancharangi Strip - Zero Shadow/Border Artifacts */
+.pancharangi-top-strip {
+  height: 5px;
+  width: 100%;
+  flex-shrink: 0;
+  background: linear-gradient(to right,
+      #ffffff 0%, #ffffff 20%,
+      #ff2a2a 20%, #ff2a2a 40%,
+      #FFD700 40%, #FFD700 60%,
+      #00cc00 60%, #00cc00 80%,
+      #00bfff 80%, #00bfff 100%
+    );
+}
+
+@keyframes modalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px;
+  border-bottom: 1px solid #f1f5f9;
+  background: #fbfbfd;
+
+  .modal-title-box {
+    display: flex;
+    flex-direction: column;
+
+    .modal-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #0f172a;
+    }
+
+    .modal-sub {
+      font-size: 0.76rem;
+      color: #64748b;
+    }
+  }
+
+  .btn-close-modal {
+    background: #f1f5f9;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    color: #475569;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+  }
+}
+
+.modal-search-wrapper {
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  gap: 8px;
+  border-bottom: 1px solid #e2e8f0;
+  background: #ffffff;
+
+  .modal-search-icon {
+    font-size: 1rem;
+    color: #94a3b8;
+  }
+
+  .modal-search-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 0.92rem;
+    color: #1e293b;
+
+    &::placeholder {
+      color: #94a3b8;
+    }
+  }
+
+  .btn-clear-query {
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 4px;
+
+    &:hover {
+      color: #475569;
+    }
+  }
+}
+
+.modal-top-section {
+  padding: 10px 16px;
+  background: #fffdf5;
+  border-bottom: 1px solid #fef3c7;
+
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #92400e;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+
+  .badges-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+}
+
+/* Modal Badges Container with Alphabetical Letter Groups */
+.modal-badges-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 16px 20px 16px;
+  background: #ffffff;
+
+  .letter-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+  }
+
+  .letter-separator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 12px 0 8px 0;
+    width: 100%;
+
+    .letter-badge {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: $brand-blue;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .separator-line {
+      flex: 1;
+      height: 1px;
+      background: #e2e8f0;
+    }
+  }
+
+  .badges-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .modal-no-results {
+    text-align: center;
+    color: #64748b;
+    padding: 30px 10px;
+    font-size: 0.9rem;
+    width: 100%;
+  }
+}
+
+.badge-chip {
+  padding: 6px 12px;
+  font-size: 0.82rem;
+  border-radius: 18px;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  color: #1e293b;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: #eff6ff;
+    border-color: #93c5fd;
+    color: $brand-blue;
+    transform: translateY(-1px);
+  }
+
+  &.top-chip {
+    background: #fef3c7;
+    border-color: #fde68a;
+    color: #92400e;
+    font-weight: 500;
+
+    .chip-star {
+      color: #f59e0b;
+      font-size: 0.85rem;
+    }
+  }
+
+  &.is-active-pin {
+    border-color: #f59e0b;
+    background: #fffbeb;
+    font-weight: 500;
+  }
+
+  .chip-pin {
+    font-size: 0.75rem;
+  }
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  border-top: 1px solid #f1f5f9;
+  background: #f8fafc;
+
+  .footer-hint {
+    font-size: 0.78rem;
+    color: #64748b;
+  }
+
+  .btn-done {
+    background: $brand-blue;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 14px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover {
+      background: #00366c;
+    }
+  }
+}
+
+/* Hidden state for collapsible panel */
 .is-hidden {
   display: none !important;
   content-visibility: hidden !important;

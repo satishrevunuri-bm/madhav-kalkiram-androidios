@@ -1,78 +1,250 @@
 <div class="panel-container">
   <!-- Collapsible Header -->
   <button class="panel-header" (click)="togglePanel()">
-    <h2>Trikala Sandhya - PDFs (125 Languages) - त्रिकाल संध्या - PDF (125 भाषाएँ)</h2>
+    <h2>Trikala Sandhya - PDFs (128 Languages) - त्रिकाल संध्या - PDF (128 भाषाएँ)</h2>
     <span class="icon">{{ isOpen ? '▲' : '▼' }}</span>
   </button>
 
   <!-- Panel Content (Visible only when isOpen is true) -->
   <div class="panel-content" [class.is-hidden]="!isOpen">
 
-    <!-- Search Bar -->
-    <div class="search-container">
-      <input type="text" placeholder="Search for a language (e.g., Hindi, Russian, Tamil)..." (input)="onSearch($event)"
-        class="search-input" />
+    <!-- Search / Language Selector Trigger Bar -->
+    <div class="search-trigger-container" (click)="openSearchModal()" role="button" tabindex="0">
+      <div class="search-trigger-bar">
+        <div class="search-left">
+          <span class="search-icon">🔍</span>
+          <span class="search-placeholder">Search language or select from A–Z badges...</span>
+        </div>
+        <span class="badge-count-pill">{{ allLanguages.length }} Languages ➔</span>
+      </div>
     </div>
 
-    <!-- Language Tiles Grid -->
-    <div class="tiles-grid">
-      @for (lang of filteredLanguages; track lang.englishName) {
-        <div class="language-tile">
-          <!-- Row 1: Title and Buttons -->
-          <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px;">
-            <div style="display: flex; flex-direction: column; flex: 1;">
-              <span style="font-weight: 500; color: #0d47a1; font-size: 1rem; line-height: 1.2;">
-                {{ getFormattedTitle(lang).main }}
-                @if (getFormattedTitle(lang).iast) {
-                  <span style="font-size: 0.65rem; background: #eef2ff; color: #4f46e5; padding: 2px 5px; border-radius: 4px; margin-left: 6px; font-weight: 600; vertical-align: middle;">IAST</span>
-                }
-              </span>
-            </div>
-            
-            <div class="tile-actions" style="display: flex; gap: 8px;">
-              <a [routerLink]="['/reader']" [queryParams]="{ url: '/assets/trisandhya/' + lang.htmlFilename }" class="btn btn-read" style="padding: 6px 12px; font-size: 0.8rem;">
-                View
-              </a>
-              <a [href]="'https://kalkiram.com/trisandhya/' + lang.pdfFilename" target="_blank" download class="btn btn-download" style="display: flex; align-items: center; justify-content: center; gap: 4px; padding: 6px 12px; font-size: 0.8rem;">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width: 14px; height: 14px;">
-                  <path fill-rule="evenodd" d="M12 2.25a.75.75 0 01.75.75v11.69l3.22-3.22a.75.75 0 111.06 1.06l-4.5 4.5a.75.75 0 01-1.06 0l-4.5-4.5a.75.75 0 111.06-1.06l3.22 3.22V3a.75.75 0 01.75-.75zm-9 13.5a.75.75 0 01.75.75v2.25a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5V16.5a.75.75 0 011.5 0v2.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V16.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
-                </svg>
-                PDF
-              </a>
-            </div>
-          </div>
+    <!-- PINNED LANGUAGES SECTION (Visible if user has pinned any) -->
+    @if (getPinnedLanguages().length > 0) {
+      <div class="pinned-section">
+        <div class="section-banner">
+          <span class="banner-icon">📌</span>
+          <span class="banner-title">Pinned for Daily Prayer / दैनिक साधना</span>
+          <span class="banner-count">({{ getPinnedLanguages().length }})</span>
+        </div>
 
-          <!-- Row 2: Audio Player -->
-          @defer (on viewport) {
-            <div style="display: flex; flex-direction: column; gap: 4px; width: 100%;">
-              <span style="font-size: 0.75rem; color: #d97706; font-style: italic; margin-left: 2px;">{{ lang.listenText || 'Please Listen' }}</span>
-              <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
-                <audio controls preload="none" style="flex: 1; height: 36px; outline: none;" (play)="blurActiveElement()" (click)="blurActiveElement()">
-                  <source src="/assets/trisandhya/Tri_Sandhya_Master_Final.mp3" type="audio/mpeg">
-                  Your browser does not support the audio element.
-                </audio>
-                <a href="https://kalkiram.com/trisandhya/Tri_Sandhya_Master_Final.mp3" target="_blank" download="Tri_Sandhya_Master_Final.mp3" style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 4px; background-color: white; border: 1px solid #00478f; color: #00478f;" title="Download Audio">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width: 18px; height: 18px;">
-                    <path fill-rule="evenodd" d="M12 2.25a.75.75 0 01.75.75v11.69l3.22-3.22a.75.75 0 111.06 1.06l-4.5 4.5a.75.75 0 01-1.06 0l-4.5-4.5a.75.75 0 111.06-1.06l3.22 3.22V3a.75.75 0 01.75-.75zm-9 13.5a.75.75 0 01.75.75v2.25a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5V16.5a.75.75 0 011.5 0v2.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V16.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
-                  </svg>
-                </a>
+        <div class="tiles-grid">
+          @for (lang of getPinnedLanguages(); track lang.htmlFilename) {
+            <div class="language-tile is-pinned"
+                 [id]="'tile-' + lang.htmlFilename"
+                 [class.highlight-tile]="highlightedTileFilename === lang.htmlFilename">
+              <!-- Row 1: Title, Pin Button & Actions -->
+              <div class="tile-top-row">
+                <div class="tile-title-group">
+                  <span class="tile-title">
+                    {{ getFormattedTitle(lang).main }}
+                    @if (getFormattedTitle(lang).iast) {
+                      <span class="iast-tag">IAST</span>
+                    }
+                  </span>
+                </div>
+
+                <div class="tile-actions">
+                  <button type="button" class="btn-pin pinned" (click)="togglePin(lang, $event)" title="Unpin from daily prayer">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#b45309" class="pin-svg">
+                      <path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6h1.6v-6H18v-2l-2-2z"/>
+                    </svg>
+                  </button>
+                  <a [routerLink]="['/reader']" [queryParams]="{ url: '/assets/trisandhya/' + lang.htmlFilename }" class="btn btn-read">
+                    View
+                  </a>
+                  <a [href]="getPdfUrl(lang.pdfFilename)" target="_blank" download class="btn btn-download">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="pdf-icon">
+                      <path fill-rule="evenodd" d="M12 2.25a.75.75 0 01.75.75v11.69l3.22-3.22a.75.75 0 111.06 1.06l-4.5 4.5a.75.75 0 01-1.06 0l-4.5-4.5a.75.75 0 111.06-1.06l3.22 3.22V3a.75.75 0 01.75-.75zm-9 13.5a.75.75 0 01.75.75v2.25a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5V16.5a.75.75 0 011.5 0v2.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V16.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
+                    </svg>
+                    PDF
+                  </a>
+                </div>
               </div>
-            </div>
-          } @placeholder {
-            <div style="height: 36px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 0.85rem; font-style: italic;">
-              Loading audio...
+
+              <!-- Row 2: Audio Player -->
+              @defer (on viewport) {
+                <div class="tile-audio-group">
+                  <span class="listen-text">{{ lang.listenText || 'Please Listen' }}</span>
+                  <div class="audio-controls-row">
+                    <audio controls preload="none" class="audio-player" (play)="blurActiveElement()" (click)="blurActiveElement()">
+                      <source src="/assets/trisandhya/Tri_Sandhya_Master_Final.mp3" type="audio/mpeg">
+                      Your browser does not support audio.
+                    </audio>
+                    <a href="https://kalkiram.com/trisandhya/Tri_Sandhya_Master_Final.mp3" target="_blank" download="Tri_Sandhya_Master_Final.mp3" class="btn-audio-download" title="Download Audio">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="audio-dl-icon">
+                        <path fill-rule="evenodd" d="M12 2.25a.75.75 0 01.75.75v11.69l3.22-3.22a.75.75 0 111.06 1.06l-4.5 4.5a.75.75 0 01-1.06 0l-4.5-4.5a.75.75 0 111.06-1.06l3.22 3.22V3a.75.75 0 01.75-.75zm-9 13.5a.75.75 0 01.75.75v2.25a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5V16.5a.75.75 0 011.5 0v2.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V16.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              } @placeholder {
+                <div class="audio-placeholder">Loading audio...</div>
+              }
             </div>
           }
         </div>
+      </div>
+    }
+
+    <!-- ALL / UNPINNED LANGUAGES SECTION -->
+    <div class="all-languages-section">
+      @if (getPinnedLanguages().length > 0) {
+        <div class="section-sub-header">
+          <span>All Languages (A–Z) / सभी भाषाएँ</span>
+        </div>
       }
 
-      <!-- Empty State if search yields no results -->
-      @if (filteredLanguages.length === 0) {
-      <div class="no-results">
-        No languages found matching your search.
+      <div class="tiles-grid">
+        @for (lang of getUnpinnedLanguages(); track lang.htmlFilename) {
+          <div class="language-tile"
+               [id]="'tile-' + lang.htmlFilename"
+               [class.highlight-tile]="highlightedTileFilename === lang.htmlFilename">
+            <!-- Row 1: Title, Pin Button & Actions -->
+            <div class="tile-top-row">
+              <div class="tile-title-group">
+                <span class="tile-title">
+                  {{ getFormattedTitle(lang).main }}
+                  @if (getFormattedTitle(lang).iast) {
+                    <span class="iast-tag">IAST</span>
+                  }
+                </span>
+              </div>
+
+              <div class="tile-actions">
+                <button type="button" class="btn-pin" (click)="togglePin(lang, $event)" title="Pin to top for daily prayer">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" class="pin-svg">
+                    <path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6h1.6v-6H18v-2l-2-2z"/>
+                  </svg>
+                </button>
+                <a [routerLink]="['/reader']" [queryParams]="{ url: '/assets/trisandhya/' + lang.htmlFilename }" class="btn btn-read">
+                  View
+                </a>
+                <a [href]="getPdfUrl(lang.pdfFilename)" target="_blank" download class="btn btn-download">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="pdf-icon">
+                    <path fill-rule="evenodd" d="M12 2.25a.75.75 0 01.75.75v11.69l3.22-3.22a.75.75 0 111.06 1.06l-4.5 4.5a.75.75 0 01-1.06 0l-4.5-4.5a.75.75 0 111.06-1.06l3.22 3.22V3a.75.75 0 01.75-.75zm-9 13.5a.75.75 0 01.75.75v2.25a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5V16.5a.75.75 0 011.5 0v2.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V16.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
+                  </svg>
+                  PDF
+                </a>
+              </div>
+            </div>
+
+            <!-- Row 2: Audio Player -->
+            @defer (on viewport) {
+              <div class="tile-audio-group">
+                <span class="listen-text">{{ lang.listenText || 'Please Listen' }}</span>
+                <div class="audio-controls-row">
+                  <audio controls preload="none" class="audio-player" (play)="blurActiveElement()" (click)="blurActiveElement()">
+                    <source src="/assets/trisandhya/Tri_Sandhya_Master_Final.mp3" type="audio/mpeg">
+                    Your browser does not support audio.
+                  </audio>
+                  <a href="https://kalkiram.com/trisandhya/Tri_Sandhya_Master_Final.mp3" target="_blank" download="Tri_Sandhya_Master_Final.mp3" class="btn-audio-download" title="Download Audio">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="audio-dl-icon">
+                      <path fill-rule="evenodd" d="M12 2.25a.75.75 0 01.75.75v11.69l3.22-3.22a.75.75 0 111.06 1.06l-4.5 4.5a.75.75 0 01-1.06 0l-4.5-4.5a.75.75 0 111.06-1.06l3.22 3.22V3a.75.75 0 01.75-.75zm-9 13.5a.75.75 0 01.75.75v2.25a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5V16.5a.75.75 0 011.5 0v2.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V16.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            } @placeholder {
+              <div class="audio-placeholder">Loading audio...</div>
+            }
+          </div>
+        }
       </div>
-      }
     </div>
 
   </div>
 </div>
+
+<!-- ======================================================== -->
+<!-- LANGUAGE SELECTION BADGE POPUP MODAL                     -->
+<!-- ======================================================== -->
+@if (isSearchModalOpen) {
+  <div class="modal-backdrop" (click)="closeSearchModal()">
+    <div class="modal-card" (click)="$event.stopPropagation()">
+      
+      <!-- Clean Pancharangi Color Strip at Top (No Dark Border/Shadow Artifacts) -->
+      <div class="pancharangi-top-strip"></div>
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <div class="modal-title-box">
+          <span class="modal-title">Select Language / भाषा चुनें</span>
+          <span class="modal-sub">Total 128 Languages in Alphabetical Order</span>
+        </div>
+        <button type="button" class="btn-close-modal" (click)="closeSearchModal()" aria-label="Close">
+          ✕
+        </button>
+      </div>
+
+      <!-- Quick Filter Search Input inside Modal -->
+      <div class="modal-search-wrapper">
+        <span class="modal-search-icon">🔍</span>
+        <input type="text"
+               [(ngModel)]="modalSearchQuery"
+               placeholder="Type to filter e.g. Telugu, Russian, Odia..."
+               class="modal-search-input" />
+        @if (modalSearchQuery) {
+          <button type="button" class="btn-clear-query" (click)="modalSearchQuery = ''">✕</button>
+        }
+      </div>
+
+      <!-- Top Languages Quick Access -->
+      <div class="modal-top-section">
+        <div class="section-label">Top Languages / मुख्य भाषाएँ</div>
+        <div class="badges-row">
+          @for (topLang of getTopLanguages(); track topLang.htmlFilename) {
+            <button type="button"
+                    class="badge-chip top-chip"
+                    [class.is-active-pin]="isPinned(topLang)"
+                    (click)="selectLanguageFromModal(topLang)">
+              <span class="chip-star">★</span>
+              <span>{{ getFormattedTitle(topLang).main }}</span>
+              @if (isPinned(topLang)) {
+                <span class="chip-pin">📌</span>
+              }
+            </button>
+          }
+        </div>
+      </div>
+
+      <!-- All Language Badges Grouped by Letter with Horizontal Separators -->
+      <div class="modal-badges-container">
+        @for (group of getLanguageGroups(); track group.letter) {
+          <div class="letter-group">
+            <div class="letter-separator">
+              <span class="letter-badge">{{ group.letter }}</span>
+              <div class="separator-line"></div>
+            </div>
+            <div class="badges-cloud">
+              @for (bLang of group.languages; track bLang.htmlFilename) {
+                <button type="button"
+                        class="badge-chip"
+                        [class.is-active-pin]="isPinned(bLang)"
+                        (click)="selectLanguageFromModal(bLang)">
+                  <span>{{ getFormattedTitle(bLang).main }}</span>
+                  @if (isPinned(bLang)) {
+                    <span class="chip-pin">📌</span>
+                  }
+                </button>
+              }
+            </div>
+          </div>
+        }
+
+        @if (getLanguageGroups().length === 0) {
+          <div class="modal-no-results">
+            No language found matching "{{ modalSearchQuery }}".
+          </div>
+        }
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <span class="footer-hint">Tap any language to pin it for daily prayer at top</span>
+        <button type="button" class="btn-done" (click)="closeSearchModal()">Done</button>
+      </div>
+
+    </div>
+  </div>
+}

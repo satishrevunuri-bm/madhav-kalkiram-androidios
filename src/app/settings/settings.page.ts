@@ -21,14 +21,12 @@ import {
 })
 export class SettingsPage {
   appName = 'Trisandhya - Kalkiram';
-  appVersion = '1.0.11';
-  buildNumber = '12';
+  appVersion = '1.0.13';
+  buildNumber = '14';
   developerName = 'kalkiram_madhav';
   communityName = 'Devotees of Lord Madhav';
   supportEmail = 'kalkirammadhav3234@gmail.com';
   websiteUrl = 'https://kalkiram.com';
-  privacyUrl = 'https://satishrevunuri-bm.github.io/madhav-kalkiram-androidios/';
-  termsUrl = 'https://satishrevunuri-bm.github.io/madhav-kalkiram-androidios/terms.html';
 
   expandedSection: 'privacy' | 'terms' | null = null;
 
