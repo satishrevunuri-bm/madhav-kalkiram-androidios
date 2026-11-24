@@ -21,7 +21,7 @@
 
 /* --- Essential Principles Banner (Stacked & Inline) --- */
 .principles-stacked {
-  margin: 15px auto 15px auto;
+  margin: 8px auto 8px auto;
   max-width: 1200px;
   width: 90%;
   display: flex;
@@ -226,7 +226,7 @@ strong {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 8px 18px 7px 16px;
+  padding: 5px 14px 4px 12px;
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-bottom: 2px solid #d4a017;
@@ -255,7 +255,7 @@ strong {
   }
 
   .bm-book-icon {
-    font-size: 1.15rem;
+    font-size: 0.95rem;
     line-height: 1;
   }
 
@@ -263,9 +263,9 @@ strong {
     font-weight: 700;
     color: #003875;
     /* Authoritative Flag Blue */
-    font-size: 0.94rem;
-    letter-spacing: 0.2px;
-    margin-right: 6px;
+    font-size: 0.82rem;
+    letter-spacing: 0.1px;
+    margin-right: 4px;
   }
 
   &:hover {
@@ -283,12 +283,12 @@ strong {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     background: #e02424; /* Flag Red badge */
     color: #ffffff;
     border-radius: 50%;
-    font-size: 0.7rem;
+    font-size: 0.6rem;
     font-weight: 700;
     box-shadow: 0 2px 5px rgba(224, 36, 36, 0.35);
     transition: transform 0.2s ease, background 0.2s ease;
@@ -346,11 +346,11 @@ strong {
 
 @media (max-width: 768px) {
   .bm-inline-container {
-    padding: 7px 12px;
+    padding: 4px 10px;
     gap: 6px;
 
     .bm-link-title {
-      font-size: 0.86rem;
+      font-size: 0.8rem;
       margin-right: 0px;
     }
   }

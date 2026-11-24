@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject, ChangeDetectorRef } from '@angular/core';
+import { ViewWillEnter } from '@ionic/angular';
 import { Preferences } from '@capacitor/preferences';
 import { activeBmLanguages, BMLanguage } from '../data/bm-languages.data';
 import { DocumentService } from '../services/document.service';
@@ -14,12 +15,13 @@ export interface BMLanguageGroup {
   styleUrls: ['bhavishyamalika.page.scss'],
   standalone: false
 })
-export class BhavishyamalikaPage implements OnInit, OnDestroy {
+export class BhavishyamalikaPage implements OnInit, OnDestroy, ViewWillEnter {
+  private cdr = inject(ChangeDetectorRef);
   languages = activeBmLanguages;
 
   // Pinned languages (stored by unique code)
-  pinnedCodes: string[] = [];
   private readonly PINNED_STORAGE_KEY = 'pinned_bm_languages';
+  pinnedCodes: string[] = this.getInitialPinnedCodes();
 
   // Modal & Search state
   isSearchModalOpen = false;
@@ -31,8 +33,27 @@ export class BhavishyamalikaPage implements OnInit, OnDestroy {
 
   private documentService = inject(DocumentService);
 
+  private getInitialPinnedCodes(): string[] {
+    try {
+      const stored = localStorage.getItem(this.PINNED_STORAGE_KEY);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed)) {
+          return parsed;
+        }
+      }
+    } catch (e) {
+      console.warn('Could not read pinned BM languages from localStorage:', e);
+    }
+    return [];
+  }
+
   async ngOnInit(): Promise<void> {
     await this.loadPinnedLanguages();
+  }
+
+  ionViewWillEnter(): void {
+    this.loadPinnedLanguages();
   }
 
   ngOnDestroy(): void {
@@ -43,16 +64,44 @@ export class BhavishyamalikaPage implements OnInit, OnDestroy {
 
   // --- PINNING LOGIC ---
   async loadPinnedLanguages(): Promise<void> {
+    // 1. Sync from localStorage synchronously first
+    const local = this.getInitialPinnedCodes();
+    if (local.length > 0 && this.pinnedCodes.length === 0) {
+      this.pinnedCodes = local;
+      this.cdr.markForCheck();
+    }
+
+    // 2. Sync from Preferences native store
     try {
       const { value } = await Preferences.get({ key: this.PINNED_STORAGE_KEY });
       if (value) {
         const parsed = JSON.parse(value);
         if (Array.isArray(parsed)) {
           this.pinnedCodes = parsed;
+          try {
+            localStorage.setItem(this.PINNED_STORAGE_KEY, value);
+          } catch (e) {}
+          this.cdr.markForCheck();
         }
       }
     } catch (e) {
       console.warn('Could not read pinned BM languages from Preferences:', e);
+    }
+  }
+
+  private async persistPinnedCodes(): Promise<void> {
+    const json = JSON.stringify(this.pinnedCodes);
+    try {
+      localStorage.setItem(this.PINNED_STORAGE_KEY, json);
+    } catch (e) {}
+
+    try {
+      await Preferences.set({
+        key: this.PINNED_STORAGE_KEY,
+        value: json
+      });
+    } catch (e) {
+      console.warn('Could not save pinned BM languages to Preferences:', e);
     }
   }
 
@@ -72,14 +121,8 @@ export class BhavishyamalikaPage implements OnInit, OnDestroy {
       this.pinnedCodes = [...this.pinnedCodes, lang.code];
     }
 
-    try {
-      await Preferences.set({
-        key: this.PINNED_STORAGE_KEY,
-        value: JSON.stringify(this.pinnedCodes)
-      });
-    } catch (e) {
-      console.warn('Could not save pinned BM languages to Preferences:', e);
-    }
+    this.cdr.markForCheck();
+    await this.persistPinnedCodes();
   }
 
   getPinnedLanguages(): BMLanguage[] {
@@ -106,14 +149,8 @@ export class BhavishyamalikaPage implements OnInit, OnDestroy {
     // Auto-pin to top if not already pinned
     if (!this.isPinned(lang)) {
       this.pinnedCodes = [lang.code, ...this.pinnedCodes.filter(c => c !== lang.code)];
-      try {
-        await Preferences.set({
-          key: this.PINNED_STORAGE_KEY,
-          value: JSON.stringify(this.pinnedCodes)
-        });
-      } catch (e) {
-        console.warn('Could not save pinned BM languages to Preferences:', e);
-      }
+      this.cdr.markForCheck();
+      await this.persistPinnedCodes();
     }
 
     this.highlightedCardCode = lang.code;
@@ -130,6 +167,7 @@ export class BhavishyamalikaPage implements OnInit, OnDestroy {
     }
     this.highlightTimer = setTimeout(() => {
       this.highlightedCardCode = null;
+      this.cdr.markForCheck();
     }, 3500);
   }
 

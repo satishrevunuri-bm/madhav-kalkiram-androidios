@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -23,13 +23,14 @@ export interface LanguageGroup {
   styleUrl: './trisandhya-panel.scss'
 })
 export class TrisandhyaPanel implements OnInit, OnDestroy {
+  private cdr = inject(ChangeDetectorRef);
   isOpen = true;
   allLanguages: LanguageResource[] = trisandhyaResources;
   pdfVersion = TRISANDHYA_PDF_VERSION;
 
   // Pinned languages (stored by unique htmlFilename)
-  pinnedFilenames: string[] = [];
   private readonly PINNED_STORAGE_KEY = 'pinned_trisandhya_languages';
+  pinnedFilenames: string[] = this.getInitialPinnedFilenames();
 
   // Modal & search state
   isSearchModalOpen = false;
@@ -38,6 +39,21 @@ export class TrisandhyaPanel implements OnInit, OnDestroy {
   // Tile highlight state
   highlightedTileFilename: string | null = null;
   private highlightTimer: any = null;
+
+  private getInitialPinnedFilenames(): string[] {
+    try {
+      const stored = localStorage.getItem(this.PINNED_STORAGE_KEY);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed)) {
+          return parsed;
+        }
+      }
+    } catch (e) {
+      console.warn('Could not read pinned languages from localStorage:', e);
+    }
+    return [];
+  }
 
   async ngOnInit(): Promise<void> {
     await this.loadPinnedLanguages();
@@ -59,16 +75,42 @@ export class TrisandhyaPanel implements OnInit, OnDestroy {
 
   // --- PINNING LOGIC ---
   async loadPinnedLanguages(): Promise<void> {
+    const local = this.getInitialPinnedFilenames();
+    if (local.length > 0 && this.pinnedFilenames.length === 0) {
+      this.pinnedFilenames = local;
+      this.cdr.markForCheck();
+    }
+
     try {
       const { value } = await Preferences.get({ key: this.PINNED_STORAGE_KEY });
       if (value) {
         const parsed = JSON.parse(value);
         if (Array.isArray(parsed)) {
           this.pinnedFilenames = parsed;
+          try {
+            localStorage.setItem(this.PINNED_STORAGE_KEY, value);
+          } catch (e) {}
+          this.cdr.markForCheck();
         }
       }
     } catch (e) {
       console.warn('Could not read pinned languages from Preferences:', e);
+    }
+  }
+
+  private async persistPinnedFilenames(): Promise<void> {
+    const json = JSON.stringify(this.pinnedFilenames);
+    try {
+      localStorage.setItem(this.PINNED_STORAGE_KEY, json);
+    } catch (e) {}
+
+    try {
+      await Preferences.set({
+        key: this.PINNED_STORAGE_KEY,
+        value: json
+      });
+    } catch (e) {
+      console.warn('Could not save pinned languages to Preferences:', e);
     }
   }
 
@@ -88,14 +130,8 @@ export class TrisandhyaPanel implements OnInit, OnDestroy {
       this.pinnedFilenames = [...this.pinnedFilenames, lang.htmlFilename];
     }
 
-    try {
-      await Preferences.set({
-        key: this.PINNED_STORAGE_KEY,
-        value: JSON.stringify(this.pinnedFilenames)
-      });
-    } catch (e) {
-      console.warn('Could not save pinned languages to Preferences:', e);
-    }
+    this.cdr.markForCheck();
+    await this.persistPinnedFilenames();
   }
 
   getPinnedLanguages(): LanguageResource[] {
@@ -124,14 +160,8 @@ export class TrisandhyaPanel implements OnInit, OnDestroy {
     // Auto-pin the selected language to Daily Prayer at the top
     if (!this.isPinned(lang)) {
       this.pinnedFilenames = [lang.htmlFilename, ...this.pinnedFilenames.filter(f => f !== lang.htmlFilename)];
-      try {
-        await Preferences.set({
-          key: this.PINNED_STORAGE_KEY,
-          value: JSON.stringify(this.pinnedFilenames)
-        });
-      } catch (e) {
-        console.warn('Could not save pinned languages to Preferences:', e);
-      }
+      this.cdr.markForCheck();
+      await this.persistPinnedFilenames();
     }
 
     // Highlight the tile in the Pinned section at the top
@@ -149,6 +179,7 @@ export class TrisandhyaPanel implements OnInit, OnDestroy {
     }
     this.highlightTimer = setTimeout(() => {
       this.highlightedTileFilename = null;
+      this.cdr.markForCheck();
     }, 3500);
   }
 
@@ -176,8 +207,8 @@ export class TrisandhyaPanel implements OnInit, OnDestroy {
     const groupMap = new Map<string, LanguageResource[]>();
 
     for (const lang of langs) {
-      const cleanEng = lang.englishName.replace(/\s*\(Latin-IAST\)\s*/gi, '').trim();
-      const letter = (cleanEng.charAt(0) || '#').toUpperCase();
+      const cleanName = lang.englishName.replace(/\s*\(Latin-IAST\)\s*/gi, '').trim();
+      const letter = (cleanName.charAt(0) || '#').toUpperCase();
       if (!groupMap.has(letter)) {
         groupMap.set(letter, []);
       }
@@ -199,20 +230,17 @@ export class TrisandhyaPanel implements OnInit, OnDestroy {
     });
   }
 
-  // Prevents the browser from jumping when audio is clicked
-  blurActiveElement(): void {
-    if (document.activeElement instanceof HTMLElement) {
-      document.activeElement.blur();
-    }
-  }
-
   getFormattedTitle(lang: LanguageResource): { main: string; iast: boolean } {
     const hasIast = lang.englishName.includes('IAST') || lang.nativeName.includes('IAST');
     const cleanEng = lang.englishName.replace(/\s*\(Latin-IAST\)\s*/gi, '').trim();
     const cleanNat = lang.nativeName.replace(/\s*\(Latin-IAST\)\s*/gi, '').trim();
-
     let main = cleanEng.toLowerCase() === cleanNat.toLowerCase() ? cleanEng : `${cleanEng} (${cleanNat})`;
-
     return { main, iast: hasIast };
+  }
+
+  blurActiveElement(): void {
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
   }
 }
